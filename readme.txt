@@ -16,7 +16,7 @@ With knowledge of just **HTML & CSS**, code the form component in combination wi
 Don’t know how to code? Get form designs from the [themes shop](http://profilepress.net/themes/) installable via the built-in theme installer.
 
  You don't need to worry about server-side PHP validation, authentication and authorisation. Simply code forms and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
-### Features of the plugin include:**
+### Features of the plugin include:
 * Unlimited front-end login forms.
 * Unlimited front-end registration forms.
 * Unlimited front-end password reset forms.
@@ -52,7 +52,7 @@ Don’t know how to code? Get form designs from the [themes shop](http://profile
 * And lots mote...
 
 
-### Paid Extensions**
+### Paid Extensions
 * [MailChimp](http://profilepress.net/downloads/mailchimp/) - Automatically subscribe new users to your MailChimp list.
 
 == Installation ==
