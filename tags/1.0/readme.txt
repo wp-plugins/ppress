@@ -13,9 +13,9 @@ ProfilePress is a shortcode based WordPress form builder that makes building cus
 Ever wanted to create a custom Login, Registration, Password Reset forms and Front-end User Profile that will conform to a WordPress (theme) design?
 With knowledge of just **HTML & CSS**, code the form component in combination with our expressive shortcodes, make it pretty with CSS and ProfilePress will handle the rest.
 
-Don’t know how to code? Get form designs from the [themes shop](http://profilepress.net/themes/) installable via the built-in theme installer.
+Don’t know how to code? Get form designs from the [theme shop](http://profilepress.net/themes/) installable via the built-in theme installer.
 
- You don't need to worry about server-side PHP validation, authentication and authorisation. Simply code forms and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
+ You don't need to worry about server-side PHP validation, authentication and authorization. Simply code forms and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
 ### Features of the plugin include:
 * Unlimited front-end login forms.
 * Unlimited front-end registration forms.
@@ -33,12 +33,12 @@ Don’t know how to code? Get form designs from the [themes shop](http://profile
 * Unlimited edit-profile forms.
 * Unlimited front-end user profile.
 * One-click WordPress widgets creation.
-* Custom avatar upload for users.
+* Custom avatar uploads for users.
 * **Social login:** Facebook, Twitter, LinkedIn, Google, GitHub.
 * Unlimited custom profile fields.
 * Customizable tabbed widget.
 * One-time passwordless login.
-* Automagically user login after registration.
+* Auto-magically user login after registration.
 * Redirect user to a custom page after login.
 * Redirect user to a custom page after logout.
 * Redirect default profile to a custom edit Profile page.
