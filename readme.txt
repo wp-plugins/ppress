@@ -7,8 +7,7 @@ Tested up to: 4.2.2
 Stable tag: 1.0
 License: GPL-2.0+
 
-ProfilePress is a shortcode based WordPress form builder that makes building custom login, registration and password reset forms stupidly simple without having to deal with server-side PHP validation, authentication and authorisation.
-Simply code the HTML form and let ProfilePress turn it into a functional custom login, registration and password reset forms. **Magic**
+ProfilePress is a shortcode based WordPress form builder that makes building custom login, registration and password reset forms stupidly simple.
 
 == Description ==
 Ever wanted to create a custom Login, Registration, Password Reset forms and Front-end User Profile that will conform to a WordPress (theme) design?
@@ -16,7 +15,7 @@ With knowledge of just **HTML & CSS**, code the form component in combination wi
 
 Don’t know how to code? Get form designs from the [themes shop](http://profilepress.net/themes/) installable via the built-in theme installer.
 
-
+ You don't need to worry about server-side PHP validation, authentication and authorisation. Simply code forms and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
 ### Features of the plugin include:**
 * Unlimited front-end login forms.
 * Unlimited front-end registration forms.
