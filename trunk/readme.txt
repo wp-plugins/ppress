@@ -1,7 +1,7 @@
-=== ProfilePress - Custom Login, Registration & Password Reset Form Builder ===
+﻿=== ProfilePress - Custom Login, Registration & Password Reset Form Builder ===
 Contributors: Collizo4sky
 Donate link: http://profilepress.net/pricing/
-Tags: login, registration, password reset, members, widget, users, profile, front-end profile, edit profile, avatar, profile picture
+Tags: login, registration, password reset, members, widget, users, profile, front-end profile, edit profile, avatar, profile picture, custom login, custom registration, custom password reset, front-end profile, gravatar, shortcode, shortcodes, access-control, author, author profile,  custom fields, file uploads, form builder, front-end login, front-end registration, gravatar, hide wp-admin, avatar upload, builder, custom field registration, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, email confirmation, extra user fields, front-end edit profile, front-end login, front-end register, front-end registration, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, multiple registration forms, password strength meter, profile builder, register, register form, registration, registration page, user approval, user custom fields, user email, user listing, user login, user profile, user profile page, User Registration, user registration form, user-fields, widget, tab widget, avatar, social, social login, live
 Requires at least: 3.6.1
 Tested up to: 4.2.2
 Stable tag: 1.0
