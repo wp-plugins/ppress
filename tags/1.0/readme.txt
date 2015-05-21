@@ -29,7 +29,7 @@ Don’t know how to code? Get form designs from the [themes shop](http://profile
 * Built-in theme installer for installing [ProfilePress form themes](http://profilepress.net/themes/).
 
 
-### Want More? Go Premium
+### Want More? [Go Premium](http://profilepress.net/pricing/)
 * Unlimited edit-profile forms.
 * Unlimited front-end user profile.
 * One-click WordPress widgets creation.
