@@ -29,7 +29,7 @@ Don’t know how to code? Get form designs from the [theme shop](http://profilep
 * Built-in theme installer for installing [ProfilePress form themes](http://profilepress.net/themes/).
 
 
-### Want More? [Go Premium](http://profilepress.net/pricing/)
+### Want More? Go Premium
 * Unlimited edit-profile forms.
 * Unlimited front-end user profile.
 * One-click WordPress widgets creation.
@@ -50,6 +50,7 @@ Don’t know how to code? Get form designs from the [theme shop](http://profilep
 * No CAPTCHA reCAPTCHA for combating spam.
 * SEO optimized.
 * And lots mote...
+* [Go Premium](http://profilepress.net/pricing/)
 
 
 ### Paid Extensions
