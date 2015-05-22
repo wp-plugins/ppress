@@ -3,7 +3,7 @@
 class ProfilePress_Dir {
 
 	public static function load_files() {
-
+		require CLASSES . '/class.plugin-update.php';
 		require CLASSES . '/global-functions.php';
 		require CLASSES . '/tgm-dependencies.php';
 		require CLASSES . '/load-shortcake.php';

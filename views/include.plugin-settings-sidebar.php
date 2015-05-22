@@ -25,17 +25,18 @@
 		<div class="postbox">
 			<div class="handlediv"><br></div>
 			<h3 class="hndle" style="text-align: center;">
-				<span><?php _e( 'Support Plugin', 'wc-no-captcha' ); ?></span>
+				<span><?php _e( 'Help & Support', 'profilepress' ); ?></span>
 			</h3>
 
 			<div class="inside">
 				<div style="text-align: center; margin: auto">
 					<p>
-						Is this plugin useful for you? If so, please help support its ongoing development and improvement with a
-						<a href="https://flattr.com/submit/auto?user_id=tech4sky&url=https%3A%2F%2Fwordpress.org%2Fplugins%2Fppress/%2F" target="_blank">donation</a>.
+						<a href="http://docs.profilepress.net/en/latest/build/login-form" target="_blank">Building custom login forms</a>.<br>
+						<a href="http://docs.profilepress.net/en/latest/build/registration-form/" target="_blank">Building custom registration forms</a>.<br>
+						<a href="http://docs.profilepress.net/en/latest/build/password-reset" target="_blank">Building password reset forms</a>.<br>
+						<a href="http://docs.profilepress.net/en/latest/configuration/redirections/" target="_blank">Custom redirects</a>.<br>
 					</p>
 
-					<p>Or, if you are short on funds, there are other ways you can help out:</p>
 					<ul>
 						<li>Leave a positive review on the plugin's
 							<a href="https://wordpress.org/support/view/plugin-reviews/ppress">WordPress listing</a>
