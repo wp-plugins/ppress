@@ -116,31 +116,6 @@ return <<<DOC
 		</td>
 	</tr>
 		<tr>
-		<td><strong>[reg-avatar]</strong></td>
-		<td>Output the avatar or profile picture upload field of the registration form.</td>
-		<td>
-			<p><strong>title</strong>: &nbsp; advisory information about the field.</p>
-			<p><strong>class</strong>: &nbsp; space-separated list of the CSS classes</p>
-			<p><strong>placeholder</strong>: &nbsp; short hint that describes the expected value of the field</p>
-			<p><strong>id</strong>: &nbsp; unique identifier to identify the field.</p>
-			<p><strong>required</strong>: mark this field as required.</p>
-		</td>
-	</tr>
-		<tr>
-		<td><strong>[reg-cpf]</strong></td>
-		<td>Output a registration form field for a <a href="?page=pp-cpf">custom profile field</a>.</td>
-		<td>
-			<p><strong>key</strong>: &nbsp; The key for the custom profile field</p>
-			<p><strong>type</strong>: &nbsp; The type of custom profile field</p>
-			<p><strong>title</strong>: &nbsp; advisory information about the field.</p>
-			<p><strong>class</strong>: &nbsp; space-separated list of the CSS classes</p>
-			<p><strong>placeholder</strong>: &nbsp; short hint that describes the expected value of the field</p>
-			<p><strong>id</strong>: &nbsp; unique identifier to identify the field.</p>
-			<p><strong>value</strong>: the initial value present if the field is a text input field.</p>
-			<p><strong>required</strong>: mark this field as required.</p>
-		</td>
-	</tr>
-		<tr>
 		<td><strong>[reg-submit]</strong></td>
 		<td>Output the submit button of the registration form.</td>
 		<td>
