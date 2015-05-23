@@ -89,6 +89,9 @@ See the website for more info http://profilepress.net
 
 == Changelog ==
 
+= 1.0.2 =
+* Fixed theme installer
+
 = 1.0.1 =
 * Added new forms design
 
