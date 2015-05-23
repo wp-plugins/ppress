@@ -15,7 +15,7 @@ With knowledge of just **HTML & CSS**, code the form component in combination wi
 
 Don’t know how to code? Get form designs from the [theme shop](http://profilepress.net/themes/) installable via the built-in theme installer.
 
-You don't need to worry about server-side PHP validation, authentication and authorization. Simply code forms and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
+You don't need to worry about server-side PHP validation, authentication and authorization. Simply code the forms in HTML with the help of the plugin form builder and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
 
 **Note: This is the lite version of ProfilePress plugin. Want even more features? [Click here to purchase the best custom login, registration, password reset forms builder and account manager plugin now!](http://profilepress.net/pricing/)**
 
