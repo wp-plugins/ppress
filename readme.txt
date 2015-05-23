@@ -4,7 +4,7 @@ Donate link: http://profilepress.net/pricing/
 Tags: login, registration, password reset, members, widget, users, profile, frontend, front-end, front-end profile, edit profile, avatar, profile picture, custom login, custom registration, custom password reset, front-end profile, gravatar, shortcode, shortcodes, user registration, author, author profile,  custom fields, file uploads, form builder, front-end login, front-end registration, admin login, log in, sidebar, sidebar login, wordpress login, facebook login, google, google login, linkedin, linkedin login, github, github login,  twitter, twitter login, gravatar, hide wp-admin, avatar upload, builder, custom field registration, captcha, recaptcha, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, email confirmation, extra user fields, front-end edit profile, front-end login, front-end register, front-end registration, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, multiple registration forms, password strength meter, profile builder, register, register form, registration, registration page, user approval, user custom fields, user email, user listing, user login, user profile, user profile page, user registration, user registration form, user-fields, widget, tab widget, avatar, social, social login, profilepress,
 Requires at least: 3.6.1
 Tested up to: 4.2.2
-Stable tag: 1.0.1
+Stable tag: 1.0.2
 License: GPL-2.0+
 
 A shortcode based WordPress form builder that makes building custom login, registration and password reset forms stupidly simple.
@@ -15,7 +15,7 @@ With knowledge of just **HTML & CSS**, code the form component in combination wi
 
 Don’t know how to code? Get form designs from the [theme shop](http://profilepress.net/themes/) installable via the built-in theme installer.
 
-You don't need to worry about server-side PHP validation, authentication and authorization. Simply code forms and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
+You don't need to worry about server-side PHP validation, authentication and authorization. Simply code the forms in HTML with the help of the plugin form builder and ProfilePress will turn them into functional custom login, registration and password reset forms. **Magic**
 
 **Note: This is the lite version of ProfilePress plugin. Want even more features? [Click here to purchase the best custom login, registration, password reset forms builder and account manager plugin now!](http://profilepress.net/pricing/)**
 
@@ -88,6 +88,9 @@ See the website for more info http://profilepress.net
 5. Live demo on a site.
 
 == Changelog ==
+
+= 1.0.2 =
+* Fixed theme installer
 
 = 1.0.1 =
 * Added new forms design
