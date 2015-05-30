@@ -63,6 +63,9 @@ You don't need to worry about server-side PHP validation, authentication and aut
 * And lots mote...
 * [Go Premium](http://profilepress.net/pricing/)
 
+### Themes
+* [Pinnacle](http://profilepress.net/downloads/pinnacle-account-form/) - A smooth and clean custom login, registration and password reset ProfilePress theme for WordPress with social login.
+
 
 ### Paid Extensions
 * [MailChimp](http://profilepress.net/downloads/mailchimp/) - Automatically subscribe new users to your MailChimp list.
