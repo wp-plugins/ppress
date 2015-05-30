@@ -101,6 +101,15 @@ See the website for more info http://profilepress.net
 3. Form live preview
 4. CSS code area
 5. Live demo on a site.
+6. Front-end user profile
+7. Social login - login form
+8. Jakhu password reset theme
+9. Registration form with avatar upload
+10. Smiley registration theme
+11. Facebook-like login form
+12. FlatUI front-end edit profile page
+13. Pinnacle signup theme
+14. Pinnacle login theme with social login.
 
 == Changelog ==
 
