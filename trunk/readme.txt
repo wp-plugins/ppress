@@ -77,6 +77,18 @@ Navigate to your WordPress “Plugins” page, inside of your WordPress dashboar
 1. Once installed, click "Activate".
 
 == Frequently Asked Questions ==
+
+ProfilePress automatically create a custom login, registration and password reset page for you on activation.
+
+
+The following will be the URL for the custom login, registration, password reset page.
+
+* Log in: `http://yoursite.com/log-in/`
+* Registration or sign up: `http://yoursite.com/sign-up/`
+* Password Reset: `http://yoursite.com/reset-password/`
+
+Henceforth, all visit to the default WordPress login, registration and password reset page will be redirected to their respective custom pages created with ProfilePress.
+
 See the website for more info http://profilepress.net
 
 == Screenshots ==
