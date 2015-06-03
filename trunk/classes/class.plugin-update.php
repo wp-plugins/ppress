@@ -298,6 +298,8 @@ STRUCTURE;
 }
 
 .jakhu-content input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
   box-sizing: border-box;
 }
 CSS;
@@ -547,6 +549,12 @@ STRUCTURE;
 	bottom: -1px;
 }
 
+.jakhu-content input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
 CSS;
 
 		$wpdb->insert(
@@ -599,8 +607,9 @@ You will receive a link to create a new password via email.</span>
 STRUCTURE;
 
 		$p_css = <<<CSS
-/* css class for the password reset form generated errors */
+@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
 
+/* css class for the password reset form generated errors */
 .profilepress-reset-status {
     width: 300px;
 	position: static;
@@ -614,9 +623,6 @@ STRUCTURE;
 	-moz-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 	-webkit-box-shadow: 0 1px 3px rgba(0,0,0,0.5);
 }
-
-
-@import url(http://fonts.googleapis.com/css?family=Bree+Serif);
 
 
 .jakhu-login-form .jakhu-header span::selection {
@@ -809,6 +815,11 @@ STRUCTURE;
 	bottom: -1px;
 }
 
+.jakhu-content input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
 CSS;
 		$wpdb->insert(
 			PASSWORD_RESET_TABLE,

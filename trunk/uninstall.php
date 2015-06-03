@@ -17,7 +17,7 @@ if($plugin_general_settings['remove_plugin_data'] == 'yes' ) {
 // remove uer moderation "pending" role
 		remove_role( 'pending_users' );
 		delete_blog_option( $blog_id, 'pp_settings_data' );
-		delete_blog_option( $blog_id, 'pp_plugin_activated' );
+		delete_blog_option( $blog_id, 'pp_plugin_lite_activated' );
 		delete_site_option( $blog_id, 'pp_version' );
 		delete_site_option( $blog_id, 'pp_db_ver' );
 	}
@@ -25,7 +25,7 @@ if($plugin_general_settings['remove_plugin_data'] == 'yes' ) {
 	/** Delete plugin options */
 	function pp_delete_single_site_option() {
 		delete_option('pp_settings_data' );
-		delete_option( 'pp_plugin_activated' );
+		delete_option( 'pp_plugin_lite_activated' );
 		delete_option( 'pp_version' );
 		delete_option( 'pp_db_ver' );
 	}

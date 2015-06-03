@@ -54,7 +54,7 @@ class ProfilePress_Plugin_On_Activate {
 			return;
 		}
 
-		$is_plugin_activated = is_multisite() ? get_blog_option( '', 'pp_plugin_activated' ) : get_option( 'pp_plugin_activated' );
+		$is_plugin_activated = is_multisite() ? get_blog_option( '', 'pp_plugin_lite_activated' ) : get_option( 'pp_plugin_lite_activated' );
 
 		if ( ! $is_plugin_activated ) {
 			db_structure\PP_Db_Schema::instance();
@@ -71,10 +71,10 @@ class ProfilePress_Plugin_On_Activate {
 			 */
 
 			if ( is_multisite() ) {
-				add_blog_option( null, 'pp_plugin_activated', 'true' );
+				add_blog_option( null, 'pp_plugin_lite_activated', 'true' );
 			}
 			else {
-				add_option( 'pp_plugin_activated', 'true' );
+				add_option( 'pp_plugin_lite_activated', 'true' );
 			}
 		}
 	}
