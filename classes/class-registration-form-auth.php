@@ -160,12 +160,6 @@ class ProfilePress_Registration_Auth {
 				}
 			}
 
-
-			// if user moderation is active, send pending notification.
-			if ( self::moderation_is_active() ) {
-				PP_User_Moderation_Notification::pending( $register_user );
-			}
-
 			/* Start Action Hook */
 			do_action( 'pp_after_registration', $form_id, $user_data );
 			/* End Action Hook */
