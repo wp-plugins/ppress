@@ -144,14 +144,6 @@ class ProfilePress_Registration_Auth {
 		// register custom profile field
 		if ( ! is_wp_error( $register_user ) ) {
 
-			// if user selected a photo for upload, process it.
-			if ( isset( $files['reg_avatar']['name'] ) && ! empty( $files['reg_avatar']['name'] ) ) {
-				$upload_avatar = PP_User_Avatar_Upload::process( $files['reg_avatar'] );
-
-				// update custom profile field
-				$custom_usermeta['pp_profile_avatar'] = $upload_avatar;
-			}
-
 			// if @$register_user is no WP_Error, add the extra user profile field
 			if ( is_array( $custom_usermeta ) ) {
 

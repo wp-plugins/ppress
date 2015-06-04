@@ -357,7 +357,7 @@ STRUCTURE;
 
 /* css class for the registration form generated errors */
 .profilepress-reg-status {
-    width: 300px;
+    width: 350px;
 	position: static;
 	z-index:5;
 	margin: 10px 0;
