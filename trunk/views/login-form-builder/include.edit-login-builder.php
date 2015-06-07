@@ -97,7 +97,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 									<th scope="row"><label for="description">Create Widget</label>
 									</th>
 									<td>
-										<input type="checkbox" disabled="disabled" name="lfb_make_widget" id="make-login-widget" value="yes" <?php checked( 'yes', $make_widget ); ?> />
+										<input type="checkbox" disabled="disabled" name="lfb_make_widget" id="make-login-widget" value="yes" />
 										<label for="make-login-widget"><strong>Make this a Widget</strong></label>
 										<p class="description">Available in	<a href="http://profilepress.net/features/one-click-wordpress-widget-creation/" target="_blank">premium version</a> of the plugin</p>
 

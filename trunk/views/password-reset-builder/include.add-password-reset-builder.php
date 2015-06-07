@@ -120,7 +120,7 @@ margin: 4px 1px;
 									<th scope="row"><label for="description">Create Widget</label>
 									</th>
 									<td>
-										<input type="checkbox" disabled="disabled" name="prb_make_widget" id="make-login-widget" value="yes" <?php checked( 'yes', esc_attr( $_POST['prb_make_widget'] ) ); ?> />
+										<input type="checkbox" disabled="disabled" name="prb_make_widget" id="make-login-widget" value="yes" />
 										<label for="make-login-widget"><strong>Make this a Widget</strong></label>
 
 										<p class="description">Available in	<a href="http://profilepress.net/features/one-click-wordpress-widget-creation/" target="_blank">premium version</a> of the plugin</p>
