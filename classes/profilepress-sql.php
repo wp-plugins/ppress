@@ -1633,13 +1633,4 @@ class PROFILEPRESS_sql {
 
 		return $wpdb->get_results( $sql, 'ARRAY_A' );
 	}
-
-
-	public static function sql_insert_melange_builder() {
-
-	}
-
-	public static function sql_update_melange_builder() {
-
-	}
 }

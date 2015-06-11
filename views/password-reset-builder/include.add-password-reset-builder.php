@@ -72,7 +72,7 @@ margin: 4px 1px;
 
 							<p>
 								<?php wp_nonce_field( 'add_password_reset_builder' ); ?>
-								<input class="button-primary" type="submit" name="add_password_reset" value="Save Changes">
+								<input class="button-primary" type="submit" name="add_password_reset" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
@@ -129,7 +129,7 @@ margin: 4px 1px;
 							</table>
 							<p>
 								<?php wp_nonce_field( 'add_password_reset_builder' ); ?>
-								<input class="button-primary" type="submit" name="add_password_reset" value="Save Changes">
+								<input class="button-primary" type="submit" name="add_password_reset" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
