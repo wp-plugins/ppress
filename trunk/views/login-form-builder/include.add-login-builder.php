@@ -87,7 +87,7 @@ color: #ea9629 !important;
 							</table>
 							<p>
 								<?php wp_nonce_field( 'add_login_builder' ); ?>
-								<input class="button-primary" type="submit" name="add_login" value="Save Changes">
+								<input class="button-primary" type="submit" name="add_login" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
@@ -136,7 +136,7 @@ color: #ea9629 !important;
 							</table>
 							<p>
 								<?php wp_nonce_field( 'add_login_builder' ); ?>
-								<input class="button-primary" type="submit" name="add_login" value="Save Changes">
+								<input class="button-primary" type="submit" name="add_login" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>

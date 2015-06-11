@@ -112,7 +112,7 @@ $default_registration_css = '/* css class for the registration form generated er
 							</table>
 							<p>
 								<?php wp_nonce_field( 'add_registration_builder' ); ?>
-								<input class="button-primary" type="submit" name="add_registration" value="Save Changes">
+								<input class="button-primary" type="submit" name="add_registration" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
@@ -174,7 +174,7 @@ $default_registration_css = '/* css class for the registration form generated er
 							</table>
 							<p>
 								<?php wp_nonce_field( 'add_registration_builder' ); ?>
-								<input class="button-primary" type="submit" name="add_registration" value="Save Changes">
+								<input class="button-primary" type="submit" name="add_registration" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>

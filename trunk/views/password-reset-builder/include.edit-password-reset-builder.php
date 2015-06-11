@@ -54,7 +54,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 
 							<p>
 								<?php wp_nonce_field( 'edit_password_reset_builder' ); ?>
-								<input class="button-primary" type="submit" name="edit_password_reset" value="Save Changes">
+								<input class="button-primary" type="submit" name="edit_password_reset" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
@@ -111,7 +111,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 
 							<p>
 								<?php wp_nonce_field( 'edit_password_reset_builder' ); ?>
-								<input class="button-primary" type="submit" name="edit_password_reset" value="Save Changes">
+								<input class="button-primary" type="submit" name="edit_password_reset" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>

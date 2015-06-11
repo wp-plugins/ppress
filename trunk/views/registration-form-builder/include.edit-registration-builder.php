@@ -52,7 +52,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 							</table>
 							<p>
 								<?php wp_nonce_field( 'edit_registration_builder' ); ?>
-								<input class="button-primary" type="submit" name="edit_registration" value="Save Changes">
+								<input class="button-primary" type="submit" name="edit_registration" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
@@ -115,7 +115,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 
 							<p>
 								<?php wp_nonce_field( 'edit_registration_builder' ); ?>
-								<input class="button-primary" type="submit" name="edit_registration" value="Save Changes">
+								<input class="button-primary" type="submit" name="edit_registration" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
