@@ -65,6 +65,7 @@ You don't need to worry about server-side PHP validation, authentication and aut
 
 ### Themes
 * [Pinnacle](http://profilepress.net/downloads/pinnacle-account-form/) - A smooth and clean custom login, registration and password reset ProfilePress theme for WordPress with social login.
+* [Montserrat](http://profilepress.net/downloads/montserrat-account-form/) - Montserrat is a beautiful one-page ProfilePress account form that combines a login, registration, password reset and social login together thus eliminating the need for creating a separate forms for user registration, login and reset of passwords.
 
 
 ### Paid Extensions
