@@ -23,16 +23,29 @@ function pp_login_redirect() {
 	$login_redirect = $data['set_login_redirect'];
 
 	if ( $login_redirect == 'dashboard' ) {
-
-		return esc_url( network_site_url( '/wp-admin' ) );
-
+		$redirect = esc_url( network_site_url( '/wp-admin' ) );
+	} elseif ( ! isset( $login_redirect ) || empty( $login_redirect ) ) {
+		$redirect = network_site_url( '/wp-admin' );
+	} else {
+		$redirect = get_permalink( $login_redirect );
 	}
-	elseif ( ! isset( $login_redirect ) || empty( $login_redirect ) ) {
 
-		return network_site_url( '/wp-admin' );
-	}
-	else {
-		return get_permalink( $login_redirect );
+	return apply_filters( 'pp_login_redirect', $redirect );
+}
+
+/**
+ * Return the url to redirect to after login authentication
+ *
+ * @return bool|string
+ */
+function pp_profile_url() {
+	$data   = pp_db_data();
+	$db_url = $data['set_user_profile_shortcode'];
+
+	if ( ! empty( $db_url ) ) {
+		return get_permalink( $db_url );
+	} else {
+		return admin_url() . 'profile.php';
 	}
 }
 
@@ -95,8 +108,88 @@ function pp_login_wp_errors( $error_key, $error_value ) {
 function pp_user_id_exist( $user_id ) {
 	if ( $user = get_user_by( 'id', $user_id ) ) {
 		return $user->ID;
-	}
-	else {
+	} else {
 		return null;
 	}
+}
+
+/**
+ * Is plugin license valid?
+ *
+ * @return bool
+ */
+function pp_is_license_valid() {
+	$license = get_option( 'pp_license_status' );
+	if ( $license == 'valid' ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Is plugin license invalid?
+ * @return bool
+ */
+function pp_is_license_invalid() {
+	$license = get_option( 'pp_license_status' );
+	if ( $license == 'invalid' ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Is license empty?
+ *
+ * @return bool
+ */
+function pp_is_license_empty() {
+	$license = get_option( 'pp_license_key' );
+	if ( false == $license || empty( $license ) ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+/**
+ * Was license once active?
+ */
+function pp_license_once_valid() {
+	$license = get_option( 'pp_license_once_active' );
+	if ( $license == 'true' ) {
+		return true;
+	} else {
+		return false;
+	}
+}
+
+
+/**
+ * Filter form field attributes for unofficial attributes.
+ *
+ * @param array $atts supplied shortcode attributes
+ *
+ * @return string
+ */
+function pp_other_field_atts( $atts ) {
+	$official_atts = array( 'name', 'class', 'id', 'value', 'title', 'required', 'placeholder' );
+
+	$other_atts = array();
+
+	foreach ( $atts as $key => $value ) {
+		if ( ! in_array( $key, $official_atts ) ) {
+			$other_atts[ $key ] = $value;
+		}
+	}
+
+
+	$other_atts_html = '';
+	foreach ( $other_atts as $key => $value ) {
+		$other_atts_html .= "$key=\"$value\" ";
+	}
+
+	return $other_atts_html;
 }

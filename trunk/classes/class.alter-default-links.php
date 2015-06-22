@@ -159,6 +159,8 @@ class Modify_Redirect_Default_Links {
 				$set_redirect = $db_logout_url;
 			}
 
+			$set_redirect = apply_filters('pp_logout_redirect', $set_redirect);
+
 			return add_query_arg( 'redirect_to', $set_redirect, $logout_url );
 		}
 	}
