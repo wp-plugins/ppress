@@ -17,13 +17,10 @@ function pp_admin_css() {
 
 
 function pp_public_js() {
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'bootstrap-filestyle', ASSETS_URL . '/js/bootstrap-filestyle.js', array( 'jquery' ) );
 }
 
 function pp_admin_js() {
-	wp_enqueue_script( 'jquery' );
-	wp_enqueue_script( 'admin-scripts', ASSETS_URL . '/js/admin.js', array('jquery') );
+	wp_enqueue_script( 'pp-admin-scripts', ASSETS_URL . '/js/admin.js', array('jquery') );
 	wp_enqueue_script( 'pp-codemirror', ASSETS_URL . '/codemirror/codemirror.js' );
 	wp_enqueue_script( 'pp-codemirror-css', ASSETS_URL . '/codemirror/css.js' );
 }
