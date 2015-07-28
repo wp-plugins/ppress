@@ -9,7 +9,8 @@ function pp_db_data() {
 
 /** Addons options data */
 function pp_addon_options() {
-	return get_option( 'pp_addons_options' );
+	$addon_options = get_option( 'pp_addons_options', array() );
+	return ! empty( $addon_options ) ? $addon_options : array();
 }
 
 
@@ -24,10 +25,12 @@ function pp_login_redirect() {
 
 	if ( $login_redirect == 'dashboard' ) {
 		$redirect = esc_url( network_site_url( '/wp-admin' ) );
-	} elseif ( ! isset( $login_redirect ) || empty( $login_redirect ) ) {
-		$redirect = network_site_url( '/wp-admin' );
-	} else {
+	} elseif ( 'current_page' == $login_redirect ) {
+		$redirect = pp_get_current_url_raw();
+	} elseif ( isset( $login_redirect ) && ! empty( $login_redirect ) ) {
 		$redirect = get_permalink( $login_redirect );
+	} else {
+		$redirect = esc_url( network_site_url( '/wp-admin' ) );
 	}
 
 	return apply_filters( 'pp_login_redirect', $redirect );
@@ -50,6 +53,52 @@ function pp_profile_url() {
 }
 
 
+/** Get ProfilePress login page URL or WP default login url if it isn't set. */
+function pp_login_url() {
+	$data = pp_db_data();
+	if ( ! empty( $data['set_login_url'] ) ) {
+		$login_url = get_permalink( $data['set_login_url'] );
+	} else {
+		$login_url = wp_login_url();
+	}
+
+	return $login_url;
+}
+
+/** Get ProfilePress login page URL or WP default login url if it isn't set. */
+function pp_registration_url() {
+	$data = pp_db_data();
+	if ( ! empty( $data['set_registration_url'] ) ) {
+		$reg_url = get_permalink( $data['set_registration_url'] );
+	} else {
+		$reg_url = wp_registration_url();
+	}
+
+	return $reg_url;
+}
+
+/**
+ * Return the URL of the currently view page.
+ *
+ * @return string|void
+ */
+function pp_get_current_url() {
+	global $wp;
+
+	return home_url( add_query_arg( array(), $wp->request ) );
+}
+
+
+/**
+ * Return currently viewed page url without query string.
+ *
+ * @return string
+ */
+function pp_get_current_url_raw() {
+	return esc_url( $_SERVER['HTTP_HOST'] . parse_url( $_SERVER['REQUEST_URI'], PHP_URL_PATH ) );
+}
+
+
 /** @return string blog URL without scheme */
 function pp_site_url_without_scheme() {
 	$parsed_url = parse_url( home_url() );
@@ -63,6 +112,28 @@ function pp_site_url_without_scheme() {
 }
 
 /**
+ * Append an option to a select dropdown
+ *
+ * @param string $option option to add
+ * @param string $select select dropdown
+ *
+ * @return string
+ */
+function pp_append_option_to_select( $option, $select ) {
+	$regex = "/<select ([^<]*)>/";
+
+	preg_match( $regex, $select, $matches );
+	$select_attr = $matches[1];
+
+	$a = preg_split( $regex, $select );
+
+	$join = '<select ' . $select_attr . '>' . "\r\n";
+	$join .= $option . $a[1];
+
+	return $join;
+}
+
+/**
  * Blog name or domain name if name doesn't exist
  *
  * @return string
@@ -71,6 +142,34 @@ function pp_site_title() {
 	$blog_name = is_multisite() ? get_blog_option( null, 'blogname' ) : get_option( 'blogname' );
 
 	return ! empty( $blog_name ) ? $blog_name : str_replace( array( 'http://', 'https://' ), '', site_url() );
+}
+
+
+/**
+ * Check if an admin settings page is ProfilePress'
+ * @return bool
+ */
+function is_pp_admin_page() {
+	$pp_builder_pages = array(
+		REGISTRATION_BUILDER_SETTINGS_PAGE_SLUG,
+		LOGIN_BUILDER_SETTINGS_PAGE_SLUG,
+		PASSWORD_RESET_BUILDER_SETTINGS_PAGE_SLUG,
+		EDIT_PROFILE_BUILDER_SETTINGS_PAGE_SLUG,
+		USER_PROFILE_BUILDER_SETTINGS_PAGE_SLUG,
+		MELANGE_SETTINGS_PAGE_SLUG,
+		LICENSE_SETTINGS_PAGE_SLUG,
+		PROFILE_FIELDS_SETTINGS_PAGE_SLUG,
+		LICENSE_SETTINGS_PAGE_SLUG,
+		'pp-config',
+		'pp-contact-info',
+		'pp-install-theme',
+		'pp-extras',
+		'pp-social-login'
+	);
+
+	if ( isset( $_GET['page'] ) && in_array( $_GET['page'], $pp_builder_pages ) ) {
+		return true;
+	}
 }
 
 
@@ -111,6 +210,23 @@ function pp_user_id_exist( $user_id ) {
 	} else {
 		return null;
 	}
+}
+
+/**
+ * Get a user's username by their ID
+ *
+ * @param int $user_id
+ *
+ * @return bool|string
+ */
+function pp_get_username_by_id( $user_id ) {
+	if ( empty( $user_id ) ) {
+		return false;
+	}
+
+	$user = get_user_by( 'id', $user_id );
+
+	return $user->user_login;
 }
 
 /**

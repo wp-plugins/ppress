@@ -20,6 +20,7 @@ class ProfilePress_Dir {
 
 		require CLASSES . '/global-shortcodes/global-shortcodes.php';
 
+		require VIEWS . '/admin-footer.php';
 		require VIEWS . '/general-settings.php';
 		require VIEWS . '/login-form-builder/parent-login-shortcode-parser.php';
 		require VIEWS . '/registration-form-builder/parent-registration-shortcode-parser.php';
