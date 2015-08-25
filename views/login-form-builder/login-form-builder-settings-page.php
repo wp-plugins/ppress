@@ -12,8 +12,6 @@ Class Login_Form_Builder {
 	private $plugin_menu_item;
 
 	function __construct() {
-
-		add_action( 'network_admin_menu', array( $this, 'register_settings_page' ), 1 );
 		add_action( 'admin_menu', array( $this, 'register_settings_page' ) );
 		add_filter( 'set-screen-option', array( $this, 'save_screen_option' ), 10, 3 );
 		add_action( 'admin_print_scripts', array( $this, 'js_confirm_delete_login_form' ) );

@@ -13,7 +13,6 @@ class PP_Theme_Installer_Page {
 
 	/** CLass constructor */
 	public function __construct() {
-		add_action( 'network_admin_menu', array( $this, 'page_menu' ), 1 );
 		add_action( 'admin_menu', array( $this, 'page_menu' ) );
 	}
 

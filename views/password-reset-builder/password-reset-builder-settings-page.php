@@ -10,8 +10,6 @@ Class Password_Reset_Form_Builder {
 	private $password_reset_builder_errors, $plugin_menu_item;
 
 	public function __construct() {
-
-		add_action( 'network_admin_menu', array( $this, 'password_reset_settings_page' ), 1 );
 		add_action( 'admin_menu', array( $this, 'password_reset_settings_page' ) );
 		add_filter( 'set-screen-option', array( $this, 'save_screen_option' ), 10, 3 );
 		add_action( 'admin_print_scripts', array( $this, 'js_confirm_password_reset' ) );

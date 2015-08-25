@@ -37,7 +37,7 @@ class PP_Update {
 		set_time_limit( 0 );
 
 		// this is the current database schema version number
-		$current_db_ver = get_option( 'pp_db_lite_ver' );
+		$current_db_ver = get_site_option( 'pp_db_lite_ver' );
 
 		// this is the target version that we need to reach
 		$target_db_ver = self::DB_VER;
@@ -57,7 +57,7 @@ class PP_Update {
 
 			// update the option in the database, so that this process can always
 			// pick up where it left off
-			update_option( 'pp_db_lite_ver', $current_db_ver );
+			update_site_option( 'pp_db_lite_ver', $current_db_ver );
 		}
 	}
 

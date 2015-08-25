@@ -9,7 +9,9 @@ include_once( 'profilepress.php' );
 
 $plugin_general_settings = get_option( 'pp_settings_data' );
 
-if($plugin_general_settings['remove_plugin_data'] == 'yes' ) {
+$delete = is_multisite() ? 'yes' : $plugin_general_settings['remove_plugin_data'];
+
+if ( $delete == 'yes' ) {
 
 	/** Delete plugin options */
 	function pp_delete_multisite_option( $blog_id = '' ) {
@@ -17,19 +19,18 @@ if($plugin_general_settings['remove_plugin_data'] == 'yes' ) {
 // remove uer moderation "pending" role
 		remove_role( 'pending_users' );
 		delete_blog_option( $blog_id, 'pp_settings_data' );
-		delete_blog_option( $blog_id, 'pp_plugin_lite_activated' );
-		delete_site_option( $blog_id, 'pp_version' );
-		delete_site_option( $blog_id, 'pp_db_ver' );
+		delete_site_option( 'pp_plugin_lite_activated' );
+		delete_site_option( 'pp_version' );
+		delete_site_option( 'pp_db_ver' );
 	}
 
 	/** Delete plugin options */
 	function pp_delete_single_site_option() {
-		delete_option('pp_settings_data' );
+		delete_option( 'pp_settings_data' );
 		delete_option( 'pp_plugin_lite_activated' );
 		delete_option( 'pp_version' );
 		delete_option( 'pp_db_ver' );
 	}
-
 
 
 	global $wpdb;
@@ -40,11 +41,10 @@ if($plugin_general_settings['remove_plugin_data'] == 'yes' ) {
 
 		foreach ( $blog_ids as $blog_id ) {
 			switch_to_blog( $blog_id );
-			pp_delete_multisite_option($blog_id);
+			pp_delete_multisite_option( $blog_id );
 			restore_current_blog();
 		}
-	}
-	else {
+	} else {
 		pp_delete_single_site_option();
 	}
 
