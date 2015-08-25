@@ -154,17 +154,8 @@ function is_pp_admin_page() {
 		REGISTRATION_BUILDER_SETTINGS_PAGE_SLUG,
 		LOGIN_BUILDER_SETTINGS_PAGE_SLUG,
 		PASSWORD_RESET_BUILDER_SETTINGS_PAGE_SLUG,
-		EDIT_PROFILE_BUILDER_SETTINGS_PAGE_SLUG,
-		USER_PROFILE_BUILDER_SETTINGS_PAGE_SLUG,
-		MELANGE_SETTINGS_PAGE_SLUG,
-		LICENSE_SETTINGS_PAGE_SLUG,
-		PROFILE_FIELDS_SETTINGS_PAGE_SLUG,
-		LICENSE_SETTINGS_PAGE_SLUG,
 		'pp-config',
-		'pp-contact-info',
-		'pp-install-theme',
-		'pp-extras',
-		'pp-social-login'
+		'pp-install-theme'
 	);
 
 	if ( isset( $_GET['page'] ) && in_array( $_GET['page'], $pp_builder_pages ) ) {
@@ -308,4 +299,69 @@ function pp_other_field_atts( $atts ) {
 	}
 
 	return $other_atts_html;
+}
+
+
+/**
+ * Update option data in WordPress
+ *
+ * @param string $option
+ * @param mixed $value
+ *
+ * @return bool
+ */
+function pp_update_option( $option, $value ) {
+	$current_blog_id = get_current_blog_id();
+
+	$return = is_multisite() ? update_blog_option( $current_blog_id, $option, $value ) : update_option( $option, $value );
+
+	return $return;
+}
+
+
+/**
+ * Add option data in WordPress.
+ *
+ * @param string$option
+ * @param mixed $value
+ *
+ * @return bool
+ */
+function pp_add_option( $option, $value ) {
+	$current_blog_id = get_current_blog_id();
+
+	$return = is_multisite() ? add_blog_option( $current_blog_id, $option, $value ) : add_option( $option, $value );
+
+	return $return;
+}
+
+
+/**
+ * Delete option data in WordPress
+ *
+ * @param string $option
+ *
+ * @return bool
+ */
+function pp_delete_option( $option ) {
+	$current_blog_id = get_current_blog_id();
+
+	$return = is_multisite() ? delete_blog_option( $current_blog_id, $option ) : delete_option( $option );
+
+	return $return;
+}
+
+/**
+ * Get option data in WordPress
+ *
+ * @param string $option
+ *
+ * @return mixed|void
+ */
+function pp_get_option( $option ) {
+	$current_blog_id = get_current_blog_id();
+
+	$return = is_multisite() ? get_blog_option( $current_blog_id, $option ) : get_option( $option );
+
+	return $return;
 }

@@ -20,28 +20,10 @@ define( 'REGISTRATION_TABLE', $wpdb->base_prefix . 'pp_registration_builder' );
 class ProfilePress_Plugin_On_Activate {
 
 	/** Class instance */
-	public static function instance( $network_wide ) {
-		if ( $network_wide ) {
-			global $wpdb;
+	public static function instance() {
 
-			if ( is_plugin_active_for_network( PROFILEPRESS_SYSTEM_FILE_PATH ) ) {
-				self::plugin_settings_activation();
-			}
-			else {
-				$blog_ids = $wpdb->get_col( "SELECT blog_id FROM {$wpdb->blogs}" );
-				foreach ( $blog_ids as $blog_id ) {
-					switch_to_blog( $blog_id );
-					self::plugin_settings_activation();
-					restore_current_blog();
-				}
-			}
-
-			self::db_activation();
-		}
-		else {
-			self::plugin_settings_activation();
-			self::db_activation();
-		}
+		self::plugin_settings_activation();
+		self::db_activation();
 
 		flush_rewrite_rules();
 
@@ -54,7 +36,7 @@ class ProfilePress_Plugin_On_Activate {
 			return;
 		}
 
-		$is_plugin_activated = is_multisite() ? get_blog_option( '', 'pp_plugin_lite_activated' ) : get_option( 'pp_plugin_lite_activated' );
+		$is_plugin_activated = is_multisite() ? get_site_option( 'pp_plugin_lite_activated' ) : get_option( 'pp_plugin_lite_activated' );
 
 		if ( ! $is_plugin_activated ) {
 			db_structure\PP_Db_Schema::instance();
@@ -63,7 +45,6 @@ class ProfilePress_Plugin_On_Activate {
 			registrations\Registrations_Base::instance();
 			password_reset\Password_Reset_Base::instance();
 
-
 			/**
 			 * Save the plugin state i.e if its been install and activated at first.
 			 * It is done to avoid duplicate data insertion on plugin activation
@@ -71,9 +52,8 @@ class ProfilePress_Plugin_On_Activate {
 			 */
 
 			if ( is_multisite() ) {
-				add_blog_option( null, 'pp_plugin_lite_activated', 'true' );
-			}
-			else {
+				add_site_option( 'pp_plugin_lite_activated', 'true' );
+			} else {
 				add_option( 'pp_plugin_lite_activated', 'true' );
 			}
 		}

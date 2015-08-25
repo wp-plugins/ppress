@@ -9,8 +9,6 @@ class General_settings_page {
 	/** class constructor */
 	public function __construct() {
 		$this->db_settings_data = get_option( 'pp_settings_data' );
-
-		add_action( 'network_admin_menu', array( $this, 'register_general_settings_page' ), 1 );
 		add_action( 'admin_menu', array( $this, 'register_general_settings_page' ), 1 );
 
 	}
@@ -47,7 +45,7 @@ class General_settings_page {
 			<?php if ( isset( $_GET['settings-update'] ) && $_GET['settings-update'] ) { ?>
 				<div id="message" class="updated"><p><strong><?php _e( 'Settings saved', 'profilepress' ); ?>.</strong>
 					</p></div>
-			<?php
+				<?php
 			}
 
 			$db_settings_data = $this->db_settings_data;
@@ -222,7 +220,7 @@ class General_settings_page {
 			editor('account_status_unblock_message');
 
 		</script>
-	<?php
+		<?php
 	}
 
 	/**

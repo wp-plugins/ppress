@@ -3,8 +3,8 @@ Contributors: Collizo4sky
 Donate link: http://profilepress.net/pricing/
 Tags: login, registration, password reset, sidebar, members, widget, users, profile, frontend, front-end, front-end profile, edit profile, avatar, custom login, custom registration, custom password reset, front-end profile, shortcode, shortcodes, user, registration, author, author profile,  custom fields, file uploads, form builder, front-end login, front-end registration, admin login, log in, sidebar, sidebar login, wordpress login, facebook login, google, google login, linkedin, linkedin login, github, github login,  twitter, twitter login, gravatar, hide wp-admin, avatar upload, builder, custom field registration, captcha, recaptcha, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, email confirmation, extra user fields, front-end edit profile, front-end login, front-end register, front-end registration, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, multiple registration forms, password strength meter, profile builder, register, register form, registration, registration page, user approval, user custom fields, user email, user listing, user login, user profile, user profile page, user registration, user registration form, user-fields, widget, tab widget, avatar, social, social login
 Requires at least: 3.6.1
-Tested up to: 4.2.3
-Stable tag: 1.0.9
+Tested up to: 4.3
+Stable tag: 1.1
 License: GPL-2.0+
 
 A shortcode based WordPress form builder that makes building custom login, registration and password reset forms stupidly simple.
@@ -32,6 +32,7 @@ You don't need to worry about server-side PHP validation, authentication and aut
 * Unlimited front-end registration forms / user registration.
 * Unlimited front-end password reset forms.
 * Live preview of form design as you code.
+* Multi-step registration forms.
 * Redirect WordPress default login to custom front-end login page
 * Redirect WordPress default registration to custom front-end registration page
 * Redirect WordPress default password reset to custom password reset page.
@@ -65,11 +66,13 @@ You don't need to worry about server-side PHP validation, authentication and aut
 
 ### Themes
 * [Pinnacle](http://profilepress.net/downloads/pinnacle-account-form/) - A smooth and clean custom login, registration and password reset ProfilePress theme for WordPress with social login.
-* [Montserrat](http://profilepress.net/downloads/montserrat-account-form/) - Montserrat is a beautiful one-page ProfilePress account form that combines a login, registration, password reset and social login together thus eliminating the need for creating a separate forms for user registration, login and reset of passwords.
+* [Montserrat](http://profilepress.net/downloads/montserrat-account-form/) - a beautiful one-page ProfilePress account form that combines a login, registration, password reset and social login together thus eliminating the need for creating a separate forms for user registration, login and reset of passwords.
+* [Stride](http://profilepress.net/downloads/stride-wordpress-multi-step-registration-form/) - An elegant, customizable WordPress multi-step registration form.
 
 
 ### Paid Extensions
-* [MailChimp](http://profilepress.net/downloads/mailchimp/) - Automatically subscribe new users to your MailChimp list.
+* [MailChimp](http://profilepress.net/downloads/mailchimp/) - automatically subscribe new users to your MailChimp list.
+* [Email Confirmation](http://profilepress.net/downloads/email-confirmation/) - ensures new registered users confirm their email addresses before they can login to WordPress.
 
 == Installation ==
 
@@ -113,6 +116,12 @@ See the website for more info http://profilepress.net
 14. Pinnacle login theme with social login.
 
 == Changelog ==
+
+= 1.1 =
+* Fixed problem when plugin in multisite causes 500 internal server error.
+* Removed network_admin_menu from plugin
+* improve plugin uninstallation for multisite
+* Few bug fixes and code improvements.
 
 = 1.0.9 =
 * Fixed fatal error after upgrade in 1.0.8
