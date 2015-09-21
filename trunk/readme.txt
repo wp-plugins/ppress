@@ -2,9 +2,9 @@
 Contributors: Collizo4sky
 Donate link: http://profilepress.net/pricing/
 Tags: login, registration, password reset, sidebar, members, widget, users, profile, frontend, front-end, front-end profile, edit profile, avatar, custom login, custom registration, custom password reset, front-end profile, shortcode, shortcodes, user, registration, author, author profile,  custom fields, file uploads, form builder, front-end login, front-end registration, admin login, log in, sidebar, sidebar login, wordpress login, facebook login, google, google login, linkedin, linkedin login, github, github login,  twitter, twitter login, gravatar, hide wp-admin, avatar upload, builder, custom field registration, captcha, recaptcha, custom redirects, custom registration, custom registration form, custom registration page, custom user profile, customize profile, customize registration email, edit profile, email confirmation, extra user fields, front-end edit profile, front-end login, front-end register, front-end registration, front-end user listing, front-end user registration, login redirect, login widget, member directory, minimum password length, minimum password strength, multiple registration forms, password strength meter, profile builder, register, register form, registration, registration page, user approval, user custom fields, user email, user listing, user login, user profile, user profile page, user registration, user registration form, user-fields, widget, tab widget, avatar, social, social login
-Requires at least: 3.6.1
+Requires at least: 4.0
 Tested up to: 4.3
-Stable tag: 1.1
+Stable tag: 1.1.1
 License: GPL-2.0+
 
 A shortcode based WordPress form builder that makes building custom login, registration and password reset forms stupidly simple.
@@ -117,6 +117,9 @@ See the website for more info http://profilepress.net
 14. Pinnacle login theme with social login.
 
 == Changelog ==
+
+= 1.1.1 =
+* Fixed password reset key getting invalid when resetting passwords
 
 = 1.1 =
 * Fixed problem when plugin in multisite causes 500 internal server error.

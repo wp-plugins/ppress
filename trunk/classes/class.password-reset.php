@@ -27,6 +27,7 @@ class ProfilePress_Password_Reset {
 		return $password_reset_status;
 
 	}
+
 	/**
 	 * Does the heavy lifting of resetting password
 	 *
@@ -35,19 +36,22 @@ class ProfilePress_Password_Reset {
 	 * @return bool|WP_Error
 	 */
 	public static function retrieve_password_func( $user_login ) {
+
+		$_POST['user_login'] = $user_login;
+
 		global $wpdb, $wp_hasher;
 
 		$errors = new WP_Error();
 
-		if ( empty( $user_login ) ) {
-			$errors->add( 'empty_username', __( 'Enter a username or e-mail address.' ) );
-		} else if ( strpos( $user_login, '@' ) ) {
-			$user_data = get_user_by( 'email', trim( $user_login ) );
+		if ( empty( $_POST['user_login'] ) ) {
+			$errors->add( 'empty_username', __( '<strong>ERROR</strong>: Enter a username or e-mail address.' ) );
+		} elseif ( strpos( $_POST['user_login'], '@' ) ) {
+			$user_data = get_user_by( 'email', trim( $_POST['user_login'] ) );
 			if ( empty( $user_data ) ) {
-				$errors->add( 'invalid_email', __( 'There is no user registered with that email address.' ) );
+				$errors->add( 'invalid_email', __( '<strong>ERROR</strong>: There is no user registered with that email address.' ) );
 			}
 		} else {
-			$login = trim( $user_login );
+			$login     = trim( $_POST['user_login'] );
 			$user_data = get_user_by( 'login', $login );
 		}
 
@@ -62,13 +66,13 @@ class ProfilePress_Password_Reset {
 			return $errors;
 		}
 
-		if ( !$user_data ) {
-			$errors->add( 'invalidcombo', __( 'Invalid username or e-mail.' ) );
+		if ( ! $user_data ) {
+			$errors->add( 'invalidcombo', __( '<strong>ERROR</strong>: Invalid username or e-mail.' ) );
 
 			return $errors;
 		}
 
-		// redefining user_login ensures we return the right case in the email
+		// Redefining user_login ensures we return the right case in the email.
 		$user_login = $user_data->user_login;
 		$user_email = $user_data->user_email;
 
@@ -81,6 +85,7 @@ class ProfilePress_Password_Reset {
 		 * @param string $user_login The user login name.
 		 */
 		do_action( 'retreive_password', $user_login );
+
 		/**
 		 * Fires before a new password is retrieved.
 		 *
@@ -100,9 +105,9 @@ class ProfilePress_Password_Reset {
 		 */
 		$allow = apply_filters( 'allow_password_reset', true, $user_data->ID );
 
-		if ( !$allow ) {
+		if ( ! $allow ) {
 			return new WP_Error( 'no_password_reset', __( 'Password reset is not allowed for this user' ) );
-		} else if ( is_wp_error( $allow ) ) {
+		} elseif ( is_wp_error( $allow ) ) {
 			return $allow;
 		}
 
@@ -121,10 +126,10 @@ class ProfilePress_Password_Reset {
 
 		// Now insert the key, hashed, into the DB.
 		if ( empty( $wp_hasher ) ) {
-			require_once ABSPATH . 'wp-includes/class-phpass.php';
+			require_once ABSPATH . WPINC . '/class-phpass.php';
 			$wp_hasher = new PasswordHash( 8, true );
 		}
-		$hashed = $wp_hasher->HashPassword( $key );
+		$hashed = time() . ':' . $wp_hasher->HashPassword( $key );
 		$wpdb->update( $wpdb->users, array( 'user_activation_key' => $hashed ), array( 'user_login' => $user_login ) );
 
 		$message = __( 'Someone requested that the password be reset for the following account:' ) . "\r\n\r\n";
@@ -132,16 +137,14 @@ class ProfilePress_Password_Reset {
 		$message .= sprintf( __( 'Username: %s' ), $user_login ) . "\r\n\r\n";
 		$message .= __( 'If this was a mistake, just ignore this email and nothing will happen.' ) . "\r\n\r\n";
 		$message .= __( 'To reset your password, visit the following address:' ) . "\r\n\r\n";
-		$message .= '<' . network_site_url(
-				"wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ),
-				'login' ) . ">\r\n";
+		$message .= '<' . network_site_url( "wp-login.php?action=rp&key=$key&login=" . rawurlencode( $user_login ), 'login' ) . ">\r\n";
 
 		if ( is_multisite() ) {
 			$blogname = $GLOBALS['current_site']->site_name;
-		} else
-			// The blogname option is escaped with esc_html on the way into the database in sanitize_option
-			// we want to reverse this for the plain text arena of emails.
-		{
+		} else /*
+			 * The blogname option is escaped with esc_html on the way into the database
+			 * in sanitize_option we want to reverse this for the plain text arena of emails.
+			 */ {
 			$blogname = wp_specialchars_decode( get_option( 'blogname' ), ENT_QUOTES );
 		}
 
@@ -155,53 +158,27 @@ class ProfilePress_Password_Reset {
 		 * @param string $title Default email title.
 		 */
 		$title = apply_filters( 'retrieve_password_title', $title );
+
 		/**
 		 * Filter the message body of the password reset mail.
 		 *
 		 * @since 2.8.0
+		 * @since 4.1.0 Added `$user_login` and `$user_data` parameters.
 		 *
 		 * @param string $message Default mail message.
 		 * @param string $key The activation key.
+		 * @param string $user_login The username for the user.
+		 * @param WP_User $user_data WP_User object.
 		 */
-		$message = apply_filters( 'retrieve_password_message', $message, $key );
+		$message = apply_filters( 'retrieve_password_message', $message, $key, $user_login, $user_data );
 
-		/** BEGIN custom added code to change the mail header name and email */
-
-		$db_settings_data = get_option( 'pp_settings_data' );
-
-		// sender name
-		if ( empty( $db_settings_data['password_reset_sender_name'] ) || !isset( $db_settings_data['password_reset_sender_name'] ) ) {
-
-			$password_reset_sender_name = get_option( 'blogname' );
-		} else {
-			$password_reset_sender_name = $db_settings_data['password_reset_sender_name'];
-		}
-
-		// sender email
-		if ( empty( $db_settings_data['password_reset_sender_email'] ) || !isset( $db_settings_data['password_reset_sender_email'] ) ) {
-
-			$password_reset_sender_email = pp_admin_email();
-		} else {
-			$password_reset_sender_email = $db_settings_data['password_reset_sender_email'];
-		}
-
-		// content type
-		if ( empty( $db_settings_data['password_reset_type'] ) || !isset( $db_settings_data['password_reset_type'] ) ) {
-			$password_reset_type = 'text/plain';
-		} else {
-			$password_reset_type = $db_settings_data['password_reset_type'];
-		}
-
-		$headers[] = "From: $password_reset_sender_name <$password_reset_sender_email>";
-		$headers[] = "Content-type: $password_reset_type";
-
-		/** END custom added code to change the mail header name and email */
-
-		if ( $message && !wp_mail( $user_email, wp_specialchars_decode( $title ), $message, $headers ) ) {
+		if ( $message && ! wp_mail( $user_email, wp_specialchars_decode( $title ), $message ) ) {
 			wp_die( __( 'The e-mail could not be sent.' ) . "<br />\n" . __( 'Possible reason: your host may have disabled the mail() function.' ) );
 		}
 
 		return true;
+
+
 	}
 
 	/**
