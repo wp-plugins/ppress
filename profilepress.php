@@ -10,8 +10,8 @@
  * Plugin Name: ProfilePress Lite
  * Plugin URI: http://profilepress.net
  * Description: Stupidly simple way to create custom login, registration and password reset form without a single line of PHP.
- * Version: 1.1
- * Author: Agbonghama Collins
+ * Version: 1.1.1
+ * Author: Agbonghama Collins (W3Guy LLC)
  * Author URI: http://profilepress.net
  * Text Domain: profilepress
  * Domain Path: /languages/
