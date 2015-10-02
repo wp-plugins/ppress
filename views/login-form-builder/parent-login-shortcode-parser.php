@@ -52,7 +52,7 @@ class PP_Parent_Login_Shortcode_Parser {
 
 		$login_structure = PROFILEPRESS_sql::get_a_builder_structure( 'login', $id );
 
-		$form_tag = '<form method="post" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '">';
+		$form_tag = '<form method="post">';
 
 		self::get_login_css( $id );
 

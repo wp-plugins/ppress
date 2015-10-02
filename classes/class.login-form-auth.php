@@ -57,9 +57,13 @@ class ProfilePress_Login_Auth {
 	/**
 	 * Authenticate login
 	 *
-	 * @param $username
-	 * @param $password
-	 * @param $remember_login
+	 * @param string $username
+	 * @param string $password
+	 * @param bool $remember_login
+	 * @param string $login_form_id
+	 * @param string $redirect
+	 *
+	 * @return string/void
 	 */
 	static function login_auth( $username, $password, $remember_login = true, $login_form_id = '', $redirect ) {
 

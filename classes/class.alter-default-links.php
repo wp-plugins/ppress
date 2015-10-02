@@ -21,25 +21,25 @@ class Modify_Redirect_Default_Links {
 		// if the default password have been change i.e not empty add the filter and action
 		if ( ! empty( $this->db_settings_data['set_lost_password_url'] ) ) {
 			add_action( 'init', array( $this, 'redirect_password_reset_page' ) );
-			add_filter( 'lostpassword_url', array( $this, 'lost_password_url_func' ) );
+			add_filter( 'lostpassword_url', array( $this, 'lost_password_url_func' ), 99 );
 		}
 
 		// if the default login have been change i.e not empty add the filter and action
 		if ( ! empty( $this->db_settings_data['set_login_url'] ) ) {
 			add_action( 'init', array( $this, 'redirect_login_page' ) );
-			add_filter( 'login_url', array( $this, 'set_login_url_func' ), 10, 2 );
+			add_filter( 'login_url', array( $this, 'set_login_url_func' ), 99, 2 );
 		}
 
 
 		// if the default registration have been change i.e not empty add the filter and action
 		if ( ! empty( $this->db_settings_data['set_registration_url'] ) ) {
 			add_action( 'init', array( $this, 'redirect_reg_page' ) );
-			add_filter( 'register_url', array( $this, 'register_url_func' ) );
+			add_filter( 'register_url', array( $this, 'register_url_func' ), 99 );
 		}
 
 		// if the default logout have been change i.e not empty add the filter
 		if ( ! empty( $this->db_settings_data['set_log_out_url'] ) ) {
-			add_filter( 'logout_url', array( $this, 'logout_url_func' ), 10, 2 );
+			add_filter( 'logout_url', array( $this, 'logout_url_func' ), 99, 2 );
 		}
 
 		// redirect default logout page to blog homepage

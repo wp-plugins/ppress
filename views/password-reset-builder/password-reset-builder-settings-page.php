@@ -214,7 +214,7 @@ public function password_reset_builder_edit_page() {
 		global $password_reset_list_table;
 		$option = 'per_page';
 		$args   = array(
-			'label'   => 'Password Reset forms',
+			'label'   => __('Password Reset forms', 'ppress'),
 			'default' => 5,
 			'option'  => 'password_reset_builder_per_page'
 		);

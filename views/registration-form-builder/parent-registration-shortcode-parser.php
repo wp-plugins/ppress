@@ -55,7 +55,7 @@ class PP_Parent_Registration_Shortcode_Parser {
 		else {
 			$registration_structure = PROFILEPRESS_sql::get_a_builder_structure( 'registration', $id );
 
-			$form_tag = '<form method="post" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '" enctype="multipart/form-data">';
+			$form_tag = '<form method="post" enctype="multipart/form-data">';
 
 			return $form_tag . do_shortcode( $registration_structure ) . '</form>';
 		}

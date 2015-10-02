@@ -49,7 +49,7 @@ class PP_Parent_Password_Reset_Shortcode_Parser extends ProfilePress_Password_Re
 
 		$password_reset_structure = PROFILEPRESS_sql::get_a_builder_structure( 'password_reset', $id );
 
-		$form_tag = '<form method="post" action="' . esc_url( $_SERVER['REQUEST_URI'] ) . '">';
+		$form_tag = '<form method="post">';
 
 		return $form_tag . do_shortcode( $password_reset_structure ) . '</form>';
 	}

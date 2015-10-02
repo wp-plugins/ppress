@@ -310,7 +310,7 @@ function pp_other_field_atts( $atts ) {
  *
  * @return bool
  */
-function pp_update_option( $option, $value ) {
+function ppp_update_option( $option, $value ) {
 	$current_blog_id = get_current_blog_id();
 
 	$return = is_multisite() ? update_blog_option( $current_blog_id, $option, $value ) : update_option( $option, $value );
@@ -327,7 +327,7 @@ function pp_update_option( $option, $value ) {
  *
  * @return bool
  */
-function pp_add_option( $option, $value ) {
+function ppp_add_option( $option, $value ) {
 	$current_blog_id = get_current_blog_id();
 
 	$return = is_multisite() ? add_blog_option( $current_blog_id, $option, $value ) : add_option( $option, $value );
@@ -343,7 +343,7 @@ function pp_add_option( $option, $value ) {
  *
  * @return bool
  */
-function pp_delete_option( $option ) {
+function ppp_delete_option( $option ) {
 	$current_blog_id = get_current_blog_id();
 
 	$return = is_multisite() ? delete_blog_option( $current_blog_id, $option ) : delete_option( $option );
@@ -358,7 +358,7 @@ function pp_delete_option( $option ) {
  *
  * @return mixed|void
  */
-function pp_get_option( $option ) {
+function ppp_get_option( $option ) {
 	$current_blog_id = get_current_blog_id();
 
 	$return = is_multisite() ? get_blog_option( $current_blog_id, $option ) : get_option( $option );
