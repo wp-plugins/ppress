@@ -19,6 +19,8 @@
 					<li>And lots more.</li>
 					<li></li>
 				</ul>
+				<div>Get <strong>20%</strong> off using this coupon.</div>
+			<div style="margin: 5px"><span style="background: #e3e3e3;padding: 2px;">20PERCENTOFF</span></div>
 				<div><a href="http://profilepress.net/pricing/" target="_blank">
 						<button class="button-primary" type="button">Go Premium</button>
 					</a></div>
