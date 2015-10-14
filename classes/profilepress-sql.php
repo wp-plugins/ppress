@@ -535,11 +535,14 @@ class PROFILEPRESS_sql {
 	 *
 	 * @param $title
 	 * @param $structure
+	 * @param $handler_structure
 	 * @param $css
-	 * @param $success_registration
+	 * @param $success_password_reset
 	 * @param $date
+	 *
+	 * @return int
 	 */
-	static function sql_insert_password_reset_builder( $title, $structure, $css, $success_password_reset, $date ) {
+	static function sql_insert_password_reset_builder( $title, $structure, $handler_structure, $css, $success_password_reset, $date ) {
 		global $wpdb;
 
 		if ( is_multisite() ) {
@@ -549,6 +552,7 @@ class PROFILEPRESS_sql {
 				array(
 					'title'                  => $title,
 					'structure'              => $structure,
+					'handler_structure'      => $handler_structure,
 					'css'                    => $css,
 					'success_password_reset' => $success_password_reset,
 					'date'                   => $date,
@@ -560,21 +564,23 @@ class PROFILEPRESS_sql {
 					'%s',
 					'%s',
 					'%s',
+					'%s',
 					'%d',
 				)
 			);
-		}
-		else {
-			$insert = $wpdb->insert(
+		} else {
+			$wpdb->insert(
 				"{$wpdb->base_prefix}pp_password_reset_builder",
 				array(
 					'title'                  => $title,
 					'structure'              => $structure,
+					'handler_structure'      => $handler_structure,
 					'css'                    => $css,
 					'success_password_reset' => $success_password_reset,
 					'date'                   => $date
 				),
 				array(
+					'%s',
 					'%s',
 					'%s',
 					'%s',
@@ -590,16 +596,17 @@ class PROFILEPRESS_sql {
 
 
 	/**
-	 * Update password reset builder
+	 * Update password reset builder.
 	 *
-	 * @param $id
-	 * @param $title
-	 * @param $structure
-	 * @param $css
-	 * @param $success_password_reset
-	 * @param $date
+	 * @param int $id
+	 * @param string $title
+	 * @param string $structure
+	 * @param string $handler_structure
+	 * @param string $css
+	 * @param string $success_password_reset
+	 * @param string $date
 	 */
-	static function sql_update_password_reset_builder( $id, $title, $structure, $css, $success_password_reset, $date ) {
+	public static function sql_update_password_reset_builder( $id, $title, $structure, $handler_structure, $css, $success_password_reset, $date ) {
 		global $wpdb;
 
 		if ( is_multisite() ) {
@@ -610,6 +617,7 @@ class PROFILEPRESS_sql {
 				array(
 					'title'                  => $title,
 					'structure'              => $structure,
+					'handler_structure'      => $handler_structure,
 					'css'                    => $css,
 					'success_password_reset' => $success_password_reset,
 					'date'                   => $date,
@@ -622,16 +630,17 @@ class PROFILEPRESS_sql {
 					'%s',
 					'%s',
 					'%s',
+					'%s',
 					'%d',
 				)
 			);
-		}
-		else {
+		} else {
 			$wpdb->update(
 				"{$wpdb->base_prefix}pp_password_reset_builder",
 				array(
 					'title'                  => $title,
 					'structure'              => $structure,
+					'handler_structure'      => $handler_structure,
 					'css'                    => $css,
 					'success_password_reset' => $success_password_reset,
 					'date'                   => $date
@@ -643,11 +652,13 @@ class PROFILEPRESS_sql {
 					'%s',
 					'%s',
 					'%s',
+					'%s',
 				)
 			);
 		}
 
 	}
+
 
 	/**
 	 * Get successful message on password reset
@@ -1148,6 +1159,29 @@ class PROFILEPRESS_sql {
 		}
 
 		return $title;
+	}
+
+
+	/**
+	 * Get the structure of a password reset handler form.
+	 *
+	 * @param int $id
+	 *
+	 * @return null|string
+	 */
+	public static function get_password_reset_handler_structure( $id ) {
+
+		$current_blog_id = get_current_blog_id();
+		global $wpdb;
+		if ( is_multisite() ) {
+			$sql = "SELECT handler_structure FROM {$wpdb->base_prefix}pp_password_reset_builder WHERE id = $id AND (blog_id = 0 OR blog_id = $current_blog_id)";
+		}
+
+		else {
+			$sql = "SELECT handler_structure FROM {$wpdb->base_prefix}pp_password_reset_builder WHERE id = $id";
+		}
+
+		return $wpdb->get_var( $sql );
 	}
 
 

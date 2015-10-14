@@ -27,9 +27,11 @@ class PP_Theme_Installer_Page {
 			array( $this, 'theme_install_settings_page' ) );
 
 
-		// add external link to Go Premium
-		global $submenu;
-		$submenu['pp-config'][] = array( 'Go Premium', 'manage_options', 'http://profilepress.net/pricing/' );
+		if ( current_user_can( 'manage_options' ) ) {
+			// add external link to Go Premium
+			global $submenu;
+			$submenu['pp-config'][] = array( 'Go Premium', 'manage_options', 'http://profilepress.net/pricing/' );
+		}
 	}
 
 	/**
@@ -49,13 +51,12 @@ class PP_Theme_Installer_Page {
 			) ) );
 			exit;
 		}
-		?>
-		<?php if ( isset( $_GET['install'] ) && $_GET['install'] && check_admin_referer( 'theme_install_redirect' ) ) : ?>
+		?><?php if ( isset( $_GET['install'] ) && $_GET['install'] && check_admin_referer( 'theme_install_redirect' ) ) : ?>
 			<h2>Theme installation successful.</h2>
 			<p>Theme file: <?php echo strip_tags( $_GET['theme_title'] ); ?></p>
 			<a title="Return to Theme installer" href="?page=pp-install-theme"><?php _e( 'Return to Theme installer', 'profilepress' ); ?></a>
 
-		<?php
+			<?php
 		else :
 			self::installer_html_form( $install_theme );
 		endif;
@@ -89,11 +90,7 @@ class PP_Theme_Installer_Page {
 		?>
 		<div class="upload-theme" style="display: block !important;">
 			<p class="install-help">
-				<?php if ( is_wp_error( $install_result ) ) : ?>
-					<?php echo $install_result->get_error_message(); ?>
-				<?php else : ?>
-					<?php _e( 'If you have a ProfilePress theme in a .zip format, you may install it by uploading it here.', 'profilepress' ); ?>
-				<?php endif; ?>
+				<?php if ( is_wp_error( $install_result ) ) : ?><?php echo $install_result->get_error_message(); ?><?php else : ?><?php _e( 'If you have a ProfilePress theme in a .zip format, you may install it by uploading it here.', 'profilepress' ); ?><?php endif; ?>
 			</p>
 
 			<form class="wp-upload-form" method="post" enctype="multipart/form-data">
@@ -104,11 +101,11 @@ class PP_Theme_Installer_Page {
 		</div>
 		<div style="margin: 10px auto; text-align: center;">
 			<p class="install-help" style="font-size: 17px">
-			Get beautiful login, registration and password reset ProfilePress themes from the
-			<strong><a href="http://profilepress.net/themes" target="_blank">theme shop</a>.</strong>
+				Get beautiful login, registration and password reset ProfilePress themes from the
+				<strong><a href="http://profilepress.net/themes" target="_blank">theme shop</a>.</strong>
 			</p>
 		</div>
-	<?php
+		<?php
 	}
 
 	/** Singleton poop */

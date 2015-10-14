@@ -119,6 +119,9 @@ display: block !important;
 }
 
 .fzbuk-login-form input[type="text"], .fzbuk-login-form input[type="password"] {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
   width: 100% !important;
   border: 1px solid #314d89;
   outline: none !important;

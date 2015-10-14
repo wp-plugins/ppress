@@ -7,6 +7,7 @@
 function pp_public_css() {
 	wp_register_style( 'pp-bootstrap', ASSETS_URL . '/css/flat-ui/bs/css/bs.css' );
 	wp_enqueue_style( 'pp-flat-ui', ASSETS_URL . '/css/flat-ui/css/flat-ui.css', array( 'pp-bootstrap' ) );
+	wp_enqueue_style( 'ppcore', ASSETS_URL . '/css/ppcore.css' );
 }
 
 

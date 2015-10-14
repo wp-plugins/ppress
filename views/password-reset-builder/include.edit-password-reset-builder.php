@@ -21,26 +21,29 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 					<div class="postbox">
 						<div class="handlediv" title="Click to toggle"><br></div>
 						<h3 class="hndle ui-sortable-handle"><span>Edit Password Reset Form</span></h3>
+
 						<div class="inside">
 							<table class="form-table">
 								<tr>
-									<th scope="row"><label for="title">Theme Name</label></th>
+									<th scope="row"><label for="title"><?php _e( 'Theme Name',
+												'profilepress' ); ?></label></th>
 									<td>
 										<input type="text" id="title" name="prb_title" class="regular-text code" value="<?php echo isset( $_POST['prb_title'] ) ? esc_attr( $_POST['prb_title'] ) : $edit_password_reset['title']; ?>" required="required"/>
+
 										<p class="description">This is the internal title of your<strong>Password Reset Form</strong> for easy reference..
 										</p>
 									</td>
 								</tr>
 
 								<tr>
-									<th scope="row"><label for="pp_password_structure">Password Reset Design</label>
+									<th scope="row"><label for="pp_password_structure">Password Reset Form</label>
 									</th>
 									<td>
 										<?php
 										$content        = isset( $_POST['prb_structure'] ) ? stripslashes( $_POST['prb_structure'] ) : $edit_password_reset['structure'];
 										$editor_id      = 'pp_password_structure';
 										$wp_editor_args = array(
-											'textarea_name'    => 'prb_structure',
+											'textarea_name' => 'prb_structure',
 											'textarea_rows' => 20,
 											'wpautop'       => true,
 											'teeny'         => false,
@@ -54,19 +57,67 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 
 							<p>
 								<?php wp_nonce_field( 'edit_password_reset_builder' ); ?>
-								<input class="button-primary" type="submit" name="edit_password_reset" value="<?php _e( 'Save Changes', 'profilepress' ); ?>">
+								<input class="button-primary" type="submit" name="edit_password_reset" value="<?php _e( 'Save Changes',
+									'profilepress' ); ?>">
 							</p>
 						</div>
 					</div>
 
 					<div style="margin-top: -5px;" class="postbox">
 						<div class="handlediv" title="Click to toggle"><br></div>
-						<h3 class="hndle ui-sortable-handle" style="font-size: 18px;text-align: center"><span>Password Reset Form Preview</span></h3>
+						<h3 class="hndle ui-sortable-handle" style="font-size: 18px;text-align: center">
+							<span>Password Reset Form Preview</span></h3>
 
 						<div class="inside">
 							<iframe width="100%" height="500px" id="indexIframe" src="<?php echo admin_url( 'admin-ajax.php?action=pp-builder-preview' ); ?>"></iframe>
 							<img style="display:none" id="loadingimg" src="<?php echo ASSETS_URL; ?>/images/loading.gif"/> &nbsp;&nbsp;
-							<a style="text-align: center" class="button-secondary" id="preview_iframe">Preview Design</a>
+							<a style="text-align: center" class="button-secondary" id="preview_iframe"><?php _e( 'Preview Design',
+									'profilepress' ); ?></a>
+						</div>
+					</div>
+
+					<div class="postbox">
+						<div class="inside">
+							<table class="form-table">
+								<tr>
+									<th scope="row">
+										<label for="pp_password_handler_structure"><?php _e( 'Password Reset Handler Form' ); ?></label>
+									</th>
+									<td>
+										<?php
+										$content2        = isset( $_POST['prb_handler_structure'] ) ? stripslashes( $_POST['prb_handler_structure'] ) : $edit_password_reset['handler_structure'];
+										$editor_id2      = 'pp_password_handler_structure';
+										$wp_editor_args2 = array(
+											'textarea_name' => 'prb_handler_structure',
+											'textarea_rows' => 20,
+											'wpautop'       => true,
+											'teeny'         => false,
+											'tinymce'       => false
+										);
+										wp_editor( $content2, $editor_id2, $wp_editor_args2 ); ?>
+										<p class="description"><?php _e( 'Form Design & Structure of Password Reset Handler.' ); ?></p>
+									</td>
+								</tr>
+							</table>
+
+							<p>
+								<?php wp_nonce_field( 'edit_password_reset_builder' ); ?>
+								<input class="button-primary" type="submit" name="edit_password_reset" value="<?php _e( 'Save Changes',
+									'profilepress' ); ?>">
+							</p>
+						</div>
+					</div>
+
+					<div style="margin-top: -5px;" class="postbox">
+						<div class="handlediv" title="Click to toggle"><br></div>
+						<h3 class="hndle ui-sortable-handle" style="font-size: 18px;text-align: center">
+							<span><?php _e( 'Password Reset Handler Form Preview', 'profilepress' ); ?></span></h3>
+
+						<div class="inside">
+							<iframe width="100%" height="500px" id="handlerIframe" src="<?php echo admin_url( 'admin-ajax.php?action=pp-builder-preview' ); ?>"></iframe>
+							<img style="display:none" id="loadingimg2" src="<?php echo ASSETS_URL; ?>/images/loading.gif"/> &nbsp;&nbsp;
+							<a style="text-align: center" class="button-secondary" id="preview_handler_iframe"><?php _e( 'Preview Design',
+									'profilepress' ); ?></a>
 						</div>
 					</div>
 
@@ -77,6 +128,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 									<th scope="row"><label for="pp_password_css">CSS Stylesheet</label></th>
 									<td>
 										<textarea rows="50" name="prb_css" id="pp_password_css"><?php echo isset( $_POST['prb_css'] ) ? stripslashes( $_POST['prb_css'] ) : $edit_password_reset['css']; ?></textarea>
+
 										<p class="description">CSS Stylesheet for the Password Reset Form</p>
 									</td>
 								</tr>
@@ -87,6 +139,7 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 									</th>
 									<td>
 										<textarea name="prb_success_password_reset" id="message_success"><?php echo isset( $_POST['prb_success_password_reset'] ) ? $_POST['prb_success_password_reset'] : $edit_password_reset['success_password_reset']; ?></textarea>
+
 										<p class="description">Message to display on successful user password reset </p>
 									</td>
 								</tr>
@@ -144,13 +197,40 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 
 		$(window).load(function () {
 
-				$('#pp_password_structure').on('change', function (e) {
-					window.onbeforeunload = function (e) {
-						return 'The changes you made will be lost if you navigate away from this page.';
-					};
+			// password reset form handler when preview is clicked
+			$('#pp_password_handler_structure').on('change', function (e) {
+				window.onbeforeunload = function (e) {
+					return 'The changes you made will be lost if you navigate away from this page.';
+				};
+			});
+
+			var raw_builder_structure1 = $('#pp_password_handler_structure').val();
+
+			$.ajax({
+				type: "POST",
+				url: ajaxurl,
+				data: {
+					builder_structure: raw_builder_structure1,
+					action: 'pp-builder-preview'
+				}
+			})
+				.done(function (builder_structure1) {
+
+					var builder_css = codemirror_editor.getValue();
+					var iframe = $('#handlerIframe').contents();
+
+					$(iframe).contents().find('body').html(builder_structure1);
+					$(iframe).contents().find('style').html(builder_css);
 				});
 
-			/* If TinyMCE visual is active, get the content using "tinymce" JS object otherwise use jQuery to get the Text version content */
+
+			// password reset form when preview is clicked
+			$('#pp_password_structure').on('change', function (e) {
+				window.onbeforeunload = function (e) {
+					return 'The changes you made will be lost if you navigate away from this page.';
+				};
+			});
+
 			var raw_builder_structure = $('#pp_password_structure').val();
 
 			$.ajax({
@@ -177,6 +257,8 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 			});
 		});
 
+
+		// password reset form when preview is clicked
 		$('#preview_iframe').click(function () {
 			var raw_builder_structure = $('#pp_password_structure').val();
 			var builder_css = codemirror_editor.getValue();
@@ -197,6 +279,31 @@ require_once VIEWS . '/include.settings-page-tab.php'; ?>
 					$(iframe1).contents().find('body').html(builder_structure);
 					$(iframe1).contents().find('style').html(builder_css);
 					$("#loadingimg").hide();
+				});
+		});
+
+
+		// password reset form handler when preview is clicked
+		$('#preview_handler_iframe').click(function () {
+			var raw_builder_structure = $('#pp_password_handler_structure').val();
+			var builder_css = codemirror_editor.getValue();
+			var iframe1 = $('#handlerIframe').contents();
+
+			// show pre-loader
+			$("#loadingimg2").show();
+
+			$.ajax({
+				type: "POST",
+				url: ajaxurl,
+				data: {
+					builder_structure: raw_builder_structure,
+					action: 'pp-builder-preview'
+				}
+			})
+				.done(function (builder_structure) {
+					$(iframe1).contents().find('body').html(builder_structure);
+					$(iframe1).contents().find('style').html(builder_css);
+					$("#loadingimg2").hide();
 				});
 		});
 

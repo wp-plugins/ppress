@@ -43,7 +43,7 @@ class General_settings_page {
 			<div id="icon-options-general" class="icon32"></div>
 			<h2><?php _e( 'General Settings - ProfilePress Lite', 'profilepress' ); ?></h2>
 			<?php if ( isset( $_GET['settings-update'] ) && $_GET['settings-update'] ) { ?>
-				<div id="message" class="updated"><p><strong><?php _e( 'Settings saved', 'profilepress' ); ?>.</strong>
+				<div id="message" class="updated notice is-dismissible"><p><strong><?php _e( 'Settings saved', 'profilepress' ); ?>.</strong>
 					</p></div>
 				<?php
 			}

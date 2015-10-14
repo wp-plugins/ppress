@@ -9,7 +9,7 @@ namespace ProfilePress\Plugin_Update;
 class PP_Update {
 	public static $instance;
 
-	const DB_VER = 2;
+	const DB_VER = 3;
 
 	/** init */
 	public function init_options() {
@@ -846,6 +846,31 @@ CSS;
 	public function pp_update_routine_2() {
 		delete_site_option('pp_plugin_activated');
 		delete_site_option('pp_db_ver');
+	}
+
+	/**
+	 * increase custom field option size
+	 */
+	public function pp_update_routine_3() {
+		global $wpdb;
+
+		$table = PASSWORD_RESET_TABLE;
+		$form  = <<<FORM
+<div class="pp-reset-password-form">
+	<h3>Enter your new password below.</h3>
+	<label for="password1">New password<span class="req">*</span></label>
+	[enter-password id="password1" required autocomplete="off"]
+
+	<label for="password2">Re-enter new password<span class="req">*</span></label>
+	[re-enter-password id="password2" required autocomplete="off"]
+
+	[password-reset-submit class="pp-reset-button pp-reset-button-block" value="Save"]
+</div>
+FORM;
+
+		$wpdb->query( "ALTER TABLE $table ADD handler_structure LONGTEXT NOT NULL AFTER structure" );
+		$wpdb->query( "UPDATE $table SET handler_structure = '$form' WHERE id > 0" );
+
 	}
 
 	/** Singleton instance */

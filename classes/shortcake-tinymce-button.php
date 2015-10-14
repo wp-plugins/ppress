@@ -24,10 +24,10 @@ class PP_ShortcakeUI {
 	public static function shortcake_button() {
 		if ( is_plugin_active( 'shortcode-ui/shortcode-ui.php' ) ) {
 			?>
-			<a href="#" id="pp-insert-shortcake" class="button">
+			<a href="#" class="button pp-insert-shortcake">
 				<img src="<?php echo ASSETS_URL; ?>/images/buttoncon.png" alt="" style="margin: 0 2px; padding: 0; height: 100%; width: auto; vertical-align: top;"/> ProfilePress Shortcodes
 			</a>
-		<?php
+			<?php
 		}
 	}
 

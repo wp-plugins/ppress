@@ -16,12 +16,13 @@ if ( $delete == 'yes' ) {
 	/** Delete plugin options */
 	function pp_delete_multisite_option( $blog_id = '' ) {
 
-// remove uer moderation "pending" role
+		// remove uer moderation "pending" role
 		remove_role( 'pending_users' );
 		delete_blog_option( $blog_id, 'pp_settings_data' );
 		delete_site_option( 'pp_plugin_lite_activated' );
 		delete_site_option( 'pp_version' );
 		delete_site_option( 'pp_db_ver' );
+		delete_site_option( 'pp_db_lite_ver' );
 	}
 
 	/** Delete plugin options */
@@ -29,7 +30,8 @@ if ( $delete == 'yes' ) {
 		delete_option( 'pp_settings_data' );
 		delete_option( 'pp_plugin_lite_activated' );
 		delete_option( 'pp_version' );
-		delete_option( 'pp_db_ver' );
+		delete_site_option( 'pp_db_ver' );
+		delete_option( 'pp_db_lite_ver' );
 	}
 
 

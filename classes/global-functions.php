@@ -10,6 +10,7 @@ function pp_db_data() {
 /** Addons options data */
 function pp_addon_options() {
 	$addon_options = get_option( 'pp_addons_options', array() );
+
 	return ! empty( $addon_options ) ? $addon_options : array();
 }
 
@@ -25,11 +26,14 @@ function pp_login_redirect() {
 
 	if ( $login_redirect == 'dashboard' ) {
 		$redirect = esc_url( network_site_url( '/wp-admin' ) );
-	} elseif ( 'current_page' == $login_redirect ) {
+	}
+	elseif ( 'current_page' == $login_redirect ) {
 		$redirect = pp_get_current_url_raw();
-	} elseif ( isset( $login_redirect ) && ! empty( $login_redirect ) ) {
+	}
+	elseif ( isset( $login_redirect ) && ! empty( $login_redirect ) ) {
 		$redirect = get_permalink( $login_redirect );
-	} else {
+	}
+	else {
 		$redirect = esc_url( network_site_url( '/wp-admin' ) );
 	}
 
@@ -47,8 +51,27 @@ function pp_profile_url() {
 
 	if ( ! empty( $db_url ) ) {
 		return get_permalink( $db_url );
-	} else {
+	}
+	else {
 		return admin_url() . 'profile.php';
+	}
+}
+
+
+/**
+ * Return ProfilePress password reset url.
+ *
+ * @return bool|string
+ */
+function pp_password_reset_url() {
+	$data   = pp_db_data();
+	$db_url = $data['set_lost_password_url'];
+
+	if ( ! empty( $db_url ) ) {
+		return get_permalink( $db_url );
+	}
+	else {
+		return wp_lostpassword_url();
 	}
 }
 
@@ -58,7 +81,8 @@ function pp_login_url() {
 	$data = pp_db_data();
 	if ( ! empty( $data['set_login_url'] ) ) {
 		$login_url = get_permalink( $data['set_login_url'] );
-	} else {
+	}
+	else {
 		$login_url = wp_login_url();
 	}
 
@@ -70,7 +94,8 @@ function pp_registration_url() {
 	$data = pp_db_data();
 	if ( ! empty( $data['set_registration_url'] ) ) {
 		$reg_url = get_permalink( $data['set_registration_url'] );
-	} else {
+	}
+	else {
 		$reg_url = wp_registration_url();
 	}
 
@@ -198,7 +223,8 @@ function pp_login_wp_errors( $error_key, $error_value ) {
 function pp_user_id_exist( $user_id ) {
 	if ( $user = get_user_by( 'id', $user_id ) ) {
 		return $user->ID;
-	} else {
+	}
+	else {
 		return null;
 	}
 }
@@ -229,7 +255,8 @@ function pp_is_license_valid() {
 	$license = get_option( 'pp_license_status' );
 	if ( $license == 'valid' ) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -242,7 +269,8 @@ function pp_is_license_invalid() {
 	$license = get_option( 'pp_license_status' );
 	if ( $license == 'invalid' ) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -256,7 +284,8 @@ function pp_is_license_empty() {
 	$license = get_option( 'pp_license_key' );
 	if ( false == $license || empty( $license ) ) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -268,7 +297,8 @@ function pp_license_once_valid() {
 	$license = get_option( 'pp_license_once_active' );
 	if ( $license == 'true' ) {
 		return true;
-	} else {
+	}
+	else {
 		return false;
 	}
 }
@@ -322,7 +352,7 @@ function ppp_update_option( $option, $value ) {
 /**
  * Add option data in WordPress.
  *
- * @param string$option
+ * @param string $option
  * @param mixed $value
  *
  * @return bool
@@ -364,4 +394,34 @@ function ppp_get_option( $option ) {
 	$return = is_multisite() ? get_blog_option( $current_blog_id, $option ) : get_option( $option );
 
 	return $return;
+}
+
+
+/**
+ * Get front-end do password reset form url.
+ *
+ * @param string $user_login
+ * @param string $key
+ *
+ * @return string
+ */
+function pp_get_do_password_reset_url( $user_login, $key ) {
+	if ( apply_filters( 'pp_front_end_do_password_reset', true ) ) {
+		$url = pp_password_reset_url() . "?key=$key&login=" . rawurlencode( $user_login );
+	}
+	else {
+		$url = pp_password_reset_url() . "?key=$key&login=" . rawurlencode( $user_login );
+	}
+
+	return $url;
+}
+
+
+/**
+ * Get the version number of WordPress.
+ *
+ * @return string|void
+ */
+function pp_get_wordpress_version() {
+	return get_bloginfo( 'version' );
 }

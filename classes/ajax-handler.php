@@ -13,10 +13,6 @@ function pp_builder_preview_handler() {
 	elseif ( isset( $_POST['builder_structure'] ) && ! empty( $_POST['builder_structure'] ) ) {
 		echo do_shortcode( stripslashes( $_POST['builder_structure'] ) );
 	}
-	else {
-
-		echo '{"error": "Wrong request type"}';
-	}
 
 	// IMPORTANT: don't forget to "exit"
 	exit;

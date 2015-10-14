@@ -1,4 +1,11 @@
 <?php
+
+global $wpdb;
+
+define( 'LOGIN_TABLE', $wpdb->base_prefix . 'pp_login_builder' );
+define( 'PASSWORD_RESET_TABLE', $wpdb->base_prefix . 'pp_password_reset_builder' );
+define( 'REGISTRATION_TABLE', $wpdb->base_prefix . 'pp_registration_builder' );
+
 require_once 'db-structure/base.php';
 // require the login themes base
 require_once 'logins/base.php';
@@ -6,12 +13,6 @@ require_once 'logins/base.php';
 require_once 'registrations/base.php';
 require_once 'password-reset/base.php';
 require_once 'general-settings/base.php';
-
-global $wpdb;
-
-define( 'LOGIN_TABLE', $wpdb->base_prefix . 'pp_login_builder' );
-define( 'PASSWORD_RESET_TABLE', $wpdb->base_prefix . 'pp_password_reset_builder' );
-define( 'REGISTRATION_TABLE', $wpdb->base_prefix . 'pp_registration_builder' );
 
 
 /**

@@ -126,7 +126,7 @@ Class Password_Reset_Form_Builder {
 		<h2>Password Reset Builder</h2>
 
 		<?php if ( isset( $this->password_reset_builder_errors ) ) { ?>
-			<div id="message" class="error"><p><strong><?php echo $this->password_reset_builder_errors; ?>. </strong>
+			<div id="message" class="error notice is-dismissible"><p><strong><?php echo $this->password_reset_builder_errors; ?>. </strong>
 				</p></div>
 		<?php
 		}
@@ -142,41 +142,49 @@ public function password_reset_builder_edit_page() {
 	// status messages
 	if ( isset( $this->password_reset_builder_errors ) ) {
 		?>
-		<div id="message" class="error"><p><strong><?php echo $this->password_reset_builder_errors; ?>. </strong>
+		<div id="message" class="error notice is-dismissible"><p><strong><?php echo $this->password_reset_builder_errors; ?>. </strong>
 			</p></div>
 	<?php
 	}
 
 	if ( @$_GET['password-reset-edited'] ) {
-		echo '<div id="message" class="updated"><p><strong>Password Reset Form Edited. </strong></p></div>';
+		echo '<div id="message" class="updated notice is-dismissible"><p><strong>Password Reset Form Edited. </strong></p></div>';
 	}
 
 	if ( @$_GET['password-reset-added'] ) {
-		echo '<div id="message" class="updated"><p><strong>New Password Reset Form Added. </strong></p></div>';
+		echo '<div id="message" class="updated notice is-dismissible"><p><strong>New Password Reset Form Added. </strong></p></div>';
 	}
 
 	// include the edit profile template
 	require_once 'include.edit-password-reset-builder.php';
 }
 
-	/**
-	 * @param $operation
-	 * @param string $id
-	 */
-	public function save_add_edit_password_reset_builder( $operation, $id = '' ) {
+
+
+/**
+ * Save / add password reset.
+ *
+* @param $operation
+* @param string $id
+ */
+public function save_add_edit_password_reset_builder( $operation, $id = '' ) {
 		if ( isset( $_POST['add_password_reset'] ) || isset( $_POST['edit_password_reset'] ) ) {
 			$title                  = @esc_attr( $_POST['prb_title'] );
 			$structure              = @stripslashes( $_POST['prb_structure'] );
+			$handler_structure      = @stripslashes( $_POST['prb_handler_structure'] );
 			$css                    = @stripslashes( $_POST['prb_css'] );
 			$success_password_reset = @stripslashes( $_POST['prb_success_password_reset'] );
 
 
-			// catch and save form generated errors in property @password_reset_builder_errors 
+			// catch and save form generated errors in property @password_reset_builder_errors
 			if ( empty( $_POST['prb_title'] ) ) {
-				$this->password_reset_builder_errors = 'Title is empty';
+				$this->password_reset_builder_errors = __('Title is empty', 'profilepress');
 			}
 			elseif ( empty( $_POST['prb_structure'] ) ) {
-				$this->password_reset_builder_errors = 'Password Reset Design is missing';
+				$this->password_reset_builder_errors = __('Password Reset Form Design is missing', 'profilepress');
+			}
+			elseif ( empty( $_POST['prb_handler_structure'] ) ) {
+				$this->password_reset_builder_errors = __('Password Reset Handler Form is missing', 'profilepress');
 			}
 
 			if ( isset( $this->password_reset_builder_errors ) ) {
@@ -185,7 +193,7 @@ public function password_reset_builder_edit_page() {
 
 			if ( isset( $_POST['edit_password_reset'] ) && check_admin_referer( 'edit_password_reset_builder', '_wpnonce' ) && $operation == 'edit' ) {
 
-				PROFILEPRESS_sql::sql_update_password_reset_builder( $id, $title, $structure, $css, $success_password_reset, date( 'Y-m-d' ) );
+				PROFILEPRESS_sql::sql_update_password_reset_builder( $id, $title, $structure, $handler_structure, $css, $success_password_reset, date( 'Y-m-d' ) );
 
 				wp_redirect( add_query_arg( 'password-reset-edited', 'true' ) );
 				exit;
@@ -195,7 +203,7 @@ public function password_reset_builder_edit_page() {
 
 				global $wpdb;
 
-				$id = PROFILEPRESS_sql::sql_insert_password_reset_builder( $title, $structure, $css, $success_password_reset, date( 'Y-m-d' ) );
+				$id = PROFILEPRESS_sql::sql_insert_password_reset_builder( $title, $structure, $handler_structure, $css, $success_password_reset, date( 'Y-m-d' ) );
 
 				wp_redirect(
 					sprintf(

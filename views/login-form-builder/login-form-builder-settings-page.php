@@ -130,16 +130,16 @@ function login_builder_edit_page() {
 	<h2>Login Form Builder</h2>
 
 	<?php if ( isset( $this->login_builder_errors ) ) : ?>
-		<div id="message" class="error"><p><strong><?php echo $this->login_builder_errors; ?>. </strong></p></div>
+		<div id="message" class="error notice is-dismissible"><p><strong><?php echo $this->login_builder_errors; ?>. </strong></p></div>
 	<?php endif; ?>
 
 	<?php if ( @$_GET['login-added'] ) : ?>
-		<div id="message" class="updated"><p><strong>New Login Added. </strong></p></div>
+		<div id="message" class="updated notice is-dismissible"><p><strong>New Login Added. </strong></p></div>
 	<?php endif; ?>
 
 	<?php
 	if ( @$_GET['login-edited'] ) {
-		echo '<div id="message" class="updated"><p><strong>Login Edited. </strong></p></div>';
+		echo '<div id="message" class="updated notice is-dismissible"><p><strong>Login Edited. </strong></p></div>';
 	}
 	require_once 'include.edit-login-builder.php';
 }
