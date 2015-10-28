@@ -141,6 +141,8 @@ class ProfilePress_Registration_Auth {
 		// proceed to registration using wp_insert_user method which return the new user id
 		$register_user = wp_insert_user( $real_userdata );
 
+		wp_new_user_notification( $register_user, null, 'admin' );
+
 		// register custom profile field
 		if ( ! is_wp_error( $register_user ) ) {
 
