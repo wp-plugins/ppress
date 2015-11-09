@@ -14,7 +14,7 @@ class ProfilePress_Password_Reset {
 		// filter to change password reset submit button name to avoid validation for forms on same page
 		$submit_name = apply_filters( 'pp_password_reset_submit_name', 'password_reset_submit', $id );
 		if ( isset( $_POST[ $submit_name ] ) ) {
-			$password_reset = self::password_reset_status( esc_attr( $_POST['user_login'] ), $id );
+			$password_reset = self::password_reset_status( $_POST['user_login'], $id );
 		}
 
 		// display form generated messages

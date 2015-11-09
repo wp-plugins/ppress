@@ -39,8 +39,17 @@ class PP_Theme_Installer_Class {
 	/** @var  string edit-user-profile theme folder */
 	private $edit_profile_theme_folder;
 
-	/** @var string front-end-profile theme folder*/
+	/** @var string front-end-profile theme folder */
 	private $front_end_profile_theme_folder;
+
+	/** @var string front-end-profile theme folder */
+	private $melange_theme_folder;
+
+	private $melange_reg_success;
+	private $melange_reset_success;
+	private $melange_edit_profile_success;
+
+	private $password_reset_handler_structure;
 
 	/**
 	 *  Class initializer
@@ -53,8 +62,7 @@ class PP_Theme_Installer_Class {
 		// if upload was done or a success ($_FILES['key']['name'] would be set), set the filename property.
 		if ( isset( $theme_file['name'] ) ) {
 			$this->theme_file_name = self::get_file_name_without_extension( $theme_file['name'] );
-		}
-		else {
+		} else {
 			return new WP_Error( 'no_file', __( 'No theme file has been received.', 'profilepress' ) );
 		}
 
@@ -64,12 +72,13 @@ class PP_Theme_Installer_Class {
 		}
 
 		// define theme folders
-		$this->tmp_folder                        = CLASSES . '/' . 'tmp_themes';
-		$this->login_theme_folder             = THEMES_FOLDER . '/login';
-		$this->registration_theme_folder      = THEMES_FOLDER . '/registration';
-		$this->password_reset_theme_folder    = THEMES_FOLDER . '/password-reset';
-		$this->edit_profile_theme_folder      = THEMES_FOLDER . '/edit-user-profile';
-		$this->front_end_profile_theme_folder = THEMES_FOLDER . '/front-end-profile';
+		$this->tmp_folder                     = CLASSES . '/' . 'tmp_themes';
+		$this->login_theme_folder             = TEMPLATES_FOLDER . '/login';
+		$this->registration_theme_folder      = TEMPLATES_FOLDER . '/registration';
+		$this->password_reset_theme_folder    = TEMPLATES_FOLDER . '/password-reset';
+		$this->edit_profile_theme_folder      = TEMPLATES_FOLDER . '/edit-user-profile';
+		$this->front_end_profile_theme_folder = TEMPLATES_FOLDER . '/front-end-profile';
+		$this->melange_theme_folder           = TEMPLATES_FOLDER . '/melange';
 
 		// unzip the theme file
 		$unzip_theme_zip_file = $this->unzip_file( $theme_file['tmp_name'], $this->tmp_folder );
@@ -144,6 +153,9 @@ class PP_Theme_Installer_Class {
 			if ( $file == 'front-end-profile' ) {
 				$result = $this->process_theme_installation( 'front-end-profile', $folder, $theme_zip_name );
 			}
+			if ( $file == 'melange' ) {
+				$result = $this->process_theme_installation( 'melange', $folder, $theme_zip_name );
+			}
 		}
 
 		if ( isset( $result ) && is_wp_error( $result ) ) {
@@ -194,6 +206,13 @@ class PP_Theme_Installer_Class {
 			}
 		}
 
+		if ( $theme_type == 'melange' ) {
+			$process_melange_success_msgs = $this->process_melange_success_messages( $theme_type, $tmp_folder );
+			if ( is_wp_error( $process_melange_success_msgs ) ) {
+				return $process_melange_success_msgs;
+			}
+		}
+
 		$insert_theme_db = $this->insert_theme_to_db( $theme_type );
 		if ( is_wp_error( $insert_theme_db ) ) {
 			return $insert_theme_db;
@@ -235,6 +254,9 @@ class PP_Theme_Installer_Class {
 		if ( $theme_type == 'front-end-profile' ) {
 			$theme_copy_folder = $this->front_end_profile_theme_folder;
 		}
+		if ( $theme_type == 'melange' ) {
+			$theme_copy_folder = $this->melange_theme_folder;
+		}
 		foreach ( $dir_files as $content ) {
 			if ( $content == '.' || $content == '..' ) {
 				continue;
@@ -272,7 +294,7 @@ class PP_Theme_Installer_Class {
 		$theme_assets_folder_url = TEMPLATES_URL . "/$theme_type/{$this->theme_file_name}/assets";
 		foreach ( $dir_content as $file ) {
 			if ( $file == 'stylesheet.css' ) {
-				$theme_css = file_get_contents( "$tmp_folder/$theme_type/stylesheet.css" );
+				$theme_css       = file_get_contents( "$tmp_folder/$theme_type/stylesheet.css" );
 				$this->theme_css = str_replace( '{{theme_assets}}', $theme_assets_folder_url, $theme_css );
 			}
 		}
@@ -302,6 +324,9 @@ class PP_Theme_Installer_Class {
 			if ( $file == 'structure.html' ) {
 				$theme_structure       = file_get_contents( "$tmp_folder/$theme_type/structure.html" );
 				$this->theme_structure = str_replace( '{{theme_assets}}', $theme_assets_folder_url, $theme_structure );
+			} elseif ( $file == 'handler_structure.html' ) {
+				$handler_structure                      = file_get_contents( "$tmp_folder/$theme_type/handler_structure.html" );
+				$this->password_reset_handler_structure = str_replace( '{{theme_assets}}', $theme_assets_folder_url, $handler_structure );
 			}
 		}
 
@@ -328,6 +353,45 @@ class PP_Theme_Installer_Class {
 		foreach ( $dir_content as $file ) {
 			if ( $file == 'success.txt' ) {
 				$this->theme_success_message = file_get_contents( "$tmp_folder/$theme_type/success.txt" );
+			}
+		}
+
+		return true;
+	}
+
+
+	/**
+	 * Process melange success messages.
+	 *
+	 * @param string $theme_type
+	 * @param string $tmp_folder
+	 *
+	 * @return bool|WP_Error
+	 *
+	 */
+	public function process_melange_success_messages( $theme_type, $tmp_folder ) {
+
+		$dir_content = scandir( "$tmp_folder/$theme_type" );
+
+		if ( ! in_array( 'registration-success.txt', $dir_content ) ) {
+			return new WP_Error( 'success_missing', __( '<strong>Error:</strong> registration-success.txt file not found, Please try again', 'profilepress' ) );
+		}
+		if ( ! in_array( 'password-reset-success.txt', $dir_content ) ) {
+			return new WP_Error( 'success_missing', __( '<strong>Error:</strong> password-reset-success.txt file not found, Please try again', 'profilepress' ) );
+		}
+		if ( ! in_array( 'edit-profile-success.txt', $dir_content ) ) {
+			return new WP_Error( 'success_missing', __( '<strong>Error:</strong> edit-profile-success.txt file not found, Please try again', 'profilepress' ) );
+		}
+
+		foreach ( $dir_content as $file ) {
+			if ( $file == 'registration-success.txt' ) {
+				$this->melange_reg_success = file_get_contents( "$tmp_folder/$theme_type/registration-success.txt" );
+			}
+			if ( $file == 'password-reset-success.txt' ) {
+				$this->melange_reset_success = file_get_contents( "$tmp_folder/$theme_type/password-reset-success.txt" );
+			}
+			if ( $file == 'edit-profile-success.txt' ) {
+				$this->melange_edit_profile_success = file_get_contents( "$tmp_folder/$theme_type/edit-profile-success.txt" );
 			}
 		}
 
@@ -366,6 +430,13 @@ class PP_Theme_Installer_Class {
 		$date            = date( 'Y-m-d' );
 		$success_message = isset( $this->theme_success_message ) ? $this->theme_success_message : null;
 
+		// melange success messages
+		$reg_success          = $this->melange_reg_success;
+		$reset_success        = $this->melange_reset_success;
+		$edit_profile_success = $this->melange_edit_profile_success;
+
+		$handler_structure = $this->password_reset_handler_structure;
+
 		switch ( $theme_type ) {
 			case 'login':
 				$insert = PROFILEPRESS_sql::sql_insert_login_builder( $title, $structure, $css, $date );
@@ -374,13 +445,32 @@ class PP_Theme_Installer_Class {
 				$insert = PROFILEPRESS_sql::sql_insert_registration_builder( $title, $structure, $css, $success_message, $date );
 				break;
 			case 'password-reset':
-				$insert = PROFILEPRESS_sql::sql_insert_password_reset_builder( $title, $structure, $css, $success_message, $date );
+				$handler_structure = $this->password_reset_handler_structure;
+
+				if ( empty( $handler_structure ) ) {
+					$handler_structure = <<<FORM
+<div class="pp-reset-password-form">
+	<h3>Enter your new password below.</h3>
+	<label for="password1">New password<span class="req">*</span></label>
+	[enter-password id="password1" required autocomplete="off"]
+
+	<label for="password2">Re-enter new password<span class="req">*</span></label>
+	[re-enter-password id="password2" required autocomplete="off"]
+
+	[password-reset-submit class="pp-reset-button pp-reset-button-block" value="Save"]
+</div>
+FORM;
+				}
+				$insert = PROFILEPRESS_sql::sql_insert_password_reset_builder( $title, $structure, $handler_structure, $css, $success_message, $date );
 				break;
 			case 'edit-user-profile':
 				$insert = PROFILEPRESS_sql::sql_insert_edit_profile_builder( $title, $structure, $css, $success_message, $date );
 				break;
 			case 'front-end-profile':
 				$insert = PROFILEPRESS_sql::sql_insert_user_profile_builder( $title, $structure, $css, $date );
+				break;
+			case 'melange':
+				$insert = PROFILEPRESS_sql::sql_insert_melange_builder( $title, $structure, $css, $reg_success, $edit_profile_success, $reset_success, $date );
 				break;
 		}
 
@@ -435,6 +525,11 @@ class PP_Theme_Installer_Class {
 			mkdir( $dest, $permissions, true );
 		}
 
+		// create index.php file in theme assets folder
+		if ( ! file_exists( TEMPLATES_FOLDER . '/index.php' ) ) {
+			pp_create_index_file( TEMPLATES_FOLDER );
+		}
+
 		// Loop through the folder
 		$dir = dir( $source );
 		while ( false !== $entry = $dir->read() ) {
@@ -472,8 +567,7 @@ class PP_Theme_Installer_Class {
 		foreach ( $files as $file ) {
 			if ( is_dir( $file ) ) {
 				self::delete_dir( $file );
-			}
-			else {
+			} else {
 				unlink( $file );
 			}
 		}
